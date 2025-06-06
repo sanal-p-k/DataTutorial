@@ -38,7 +38,7 @@ const staggerItem = {
   },
 };
 
-const Services = () => {
+const Services: React.FC = () => {
   const services: Service[] = [
     {
       title: 'Dashboard Development',
@@ -72,9 +72,9 @@ const Services = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      variants={staggerContainer}
+      initial="initial"
+      animate="animate"
       className="relative min-h-screen flex items-center justify-center px-6 py-20 bg-gray-950"
     >
       {/* Background Image */}
@@ -98,13 +98,18 @@ const Services = () => {
         </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={staggerItem}
-              whileHover={{ y: -8, scale: 1.03 }}
-              className="relative p-6 rounded-2xl backdrop-blur-lg bg-white/5 border border-white/10 shadow-lg transition-transform"
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"
+        >
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                variants={staggerItem}
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="relative p-6 rounded-2xl backdrop-blur-lg bg-white/5 border border-white/10 shadow-lg transition-transform"
             >
               <div
                 className={`w-12 h-12 mb-6 flex items-center justify-center rounded-full bg-gradient-to-br ${service.color} shadow-md`}
@@ -115,7 +120,7 @@ const Services = () => {
               <p className="text-white/80 text-sm leading-relaxed">{service.description}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );

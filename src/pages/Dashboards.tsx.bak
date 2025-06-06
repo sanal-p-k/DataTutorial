@@ -216,7 +216,7 @@ const Dashboards = () => {
                   src={dashboard.image}
                   alt={dashboard.title}
                   className="w-full h-48 object-cover"
-                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                  onError={(e) => {
                     e.currentTarget.src = '/placeholder.jpg';
                   }}
                 />
@@ -224,7 +224,7 @@ const Dashboards = () => {
                   <h3 className="text-xl font-semibold text-purple-400 mb-1">{dashboard.title}</h3>
                   <p className="text-white/70 text-sm mb-3">{dashboard.description}</p>
                   <div className="flex flex-wrap gap-2 text-xs text-white/60">
-                    {dashboard.tools.map((tool: string) => (
+                    {dashboard.tools.map((tool) => (
                       <span key={tool} className="bg-purple-700/40 px-2 py-0.5 rounded-full">
                         {tool}
                       </span>
@@ -236,8 +236,33 @@ const Dashboards = () => {
           ))}
         </div>
       </motion.div>
+                  alt={dashboard.title}
+                  className="w-full h-48 object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = '/placeholder.jpg';
+                  }}
+                />
+                <div className="p-5">
+                  <h3 className="text-xl font-semibold text-purple-400 mb-1">{dashboard.title}</h3>
+                  <p className="text-white/70 text-sm mb-3">{dashboard.description}</p>
+                  <div className="flex flex-wrap gap-2 text-xs text-white/60">
+                    {dashboard.tools.map((tool) => (
+                      <span key={tool} className="bg-purple-700/40 px-2 py-0.5 rounded-full">
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </motion.div>
   );
+};
+
+export default Dashboards;
 };
 
 export default Dashboards;
