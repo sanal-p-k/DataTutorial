@@ -1,311 +1,78 @@
-import { motion } from 'framer-motion';
-import { 
-  AcademicCapIcon, 
-  UserGroupIcon,
-  VideoCameraIcon 
-} from '@heroicons/react/24/outline';
-
-interface Stat {
-  label: string;
-  value: string;
-}
-
-// Animation variants
-const staggerContainer = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const staggerItem = {
-  initial: {
-    opacity: 0,
-    y: 20,
-    scale: 0.95,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
+import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const About = () => {
+  const stats = [
+    { label: "YouTube Subscribers", value: "180K+" },
+    { label: "Dashboards Built", value: "100+" },
+    { label: "Years Experience", value: "10+" },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-900 pt-16">
-      <motion.div 
-        variants={staggerContainer}
-        initial="initial"
-        animate="animate"
-        className="container mx-auto px-4 py-16 max-w-6xl mx-auto"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto">
-          {/* Text Section */}
-          <div className="md:w-1/2">
-            <motion.div 
-              variants={staggerItem}
-              className="text-center"
-            >
-              <h2 className="text-4xl font-bold text-white mb-8">
-                About Me
-              </h2>
-            </motion.div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="relative min-h-screen flex items-center justify-center px-6 py-20 bg-gray-950"
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/about.jpg"
+          alt="Background"
+          className="w-full h-full object-cover object-center opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950/70 to-purple-900/60" />
+      </div>
 
-            <motion.p 
-              variants={staggerItem}
-              className="text-xl mb-4 leading-relaxed text-white/80"
-            >
-              I'm Swapnjeet S, a Senior Data Analyst with over 10 years of experience in the field. I specialize in Power BI, Tableau, SQL, and Python, and I'm passionate about turning complex data into actionable insights. Through my YouTube channel, "Data Tutorials," I've had the privilege of educating and mentoring a community of over 176K subscribers, helping aspiring data professionals navigate the world of analytics.
-            </motion.p>
+      {/* Glassy Content Container */}
+      <div className="relative z-10 max-w-6xl w-full mx-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg p-10 md:p-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          
+          {/* Text Block */}
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              About Me
+            </h2>
+            <p className="text-lg text-purple-100/90 mb-6 leading-relaxed">
+              I help businesses unlock the power of data by designing insightful dashboards, training teams, and simplifying analytics. Whether you're just getting started or optimizing enterprise-level reporting, I'm here to guide you every step of the way.
+            </p>
+            <p className="text-sm text-white/70 italic mb-8">
+              "Data without context is noise — I turn that noise into insight."
+            </p>
 
-            <motion.div 
-              variants={staggerItem}
-              className="flex flex-wrap gap-2 mb-4"
-            >
-              {['Power BI', 'Tableau', 'SQL', 'Python'].map((tech) => (
-                <motion.span
-                  key={tech}
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+              {stats.map((stat) => (
+                <motion.div
+                  key={stat.label}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/10 text-white text-sm font-medium px-3 py-1.5 rounded-full hover:bg-white/20 transition-colors"
+                  className="p-5 bg-white/10 border border-white/10 rounded-xl backdrop-blur-sm shadow-md"
                 >
-                  {tech}
-                </motion.span>
+                  <h3 className="text-3xl font-bold text-white">{stat.value}</h3>
+                  <p className="text-sm text-white/80 mt-1">{stat.label}</p>
+                </motion.div>
               ))}
-            </motion.div>
-          </div>
-
-          {/* Image Section */}
-          <div className="md:w-2/3 flex justify-center md:justify-center">
-            <motion.div
-              variants={staggerItem}
-              whileHover={{ scale: 1.05 }}
-              className="relative mx-auto"
-            >
-              <img
-                src="/about.jpg"
-                alt="Data Expert"
-                className="rounded-xl shadow-2xl max-w-lg transition-transform duration-300"
-              />
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-10 text-center max-w-2xl mx-auto">
-          {[
-            { label: 'YouTube Subscribers', value: '180K+' },
-            { label: 'Dashboards Built', value: '100+' },
-            { label: 'Years Experience', value: '10+' },
-          ].map((stat: Stat) => (
-            <motion.div
-              key={stat.label}
-              whileHover={{ y: -5 }}
-              className="p-6 bg-gray-800 rounded-lg shadow-md hover:bg-purple-500/10 transition-colors"
-            >
-              <h3 className="text-3xl font-bold text-white mb-2">{stat.value}</h3>
-              <p className="text-white/80">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </div>
-  );
-};
-
-export default About;
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto">
-          {/* Text Section */}
-          <div className="md:w-1/2">
-            <motion.div 
-              variants={staggerItem}
-              className="text-center"
-            >
-              <h2 className="text-4xl font-bold text-white mb-8">
-                About Me
-              </h2>
-            </motion.div>
-
-            <motion.p 
-              variants={staggerItem}
-              className="text-xl mb-4 leading-relaxed text-white/80"
-            >
-              I'm Swapnjeet S, a Senior Data Analyst with over 10 years of experience in the field. I specialize in Power BI, Tableau, SQL, and Python, and I'm passionate about turning complex data into actionable insights. Through my YouTube channel, "Data Tutorials," I've had the privilege of educating and mentoring a community of over 176K subscribers, helping aspiring data professionals navigate the world of analytics.
-            </motion.p>
-
-            <motion.div 
-              variants={staggerItem}
-              className="flex flex-wrap gap-2 mb-4"
-            >
-              {['Power BI', 'Tableau', 'SQL', 'Python'].map((tech) => (
-                <motion.span
-                  key={tech}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/10 text-white text-sm font-medium px-3 py-1.5 rounded-full hover:bg-white/20 transition-colors"
-                >
-                  {tech}
-                </motion.span>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Image Section */}
-          <div className="md:w-2/3 flex justify-center md:justify-center">
-            <motion.div
-              variants={staggerItem}
-              whileHover={{ scale: 1.05 }}
-              className="relative mx-auto"
-            >
-              <img
-                src="/about.jpg"
-                alt="Data Expert"
-                className="rounded-xl shadow-2xl max-w-lg transition-transform duration-300"
-              />
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-10 text-center max-w-2xl mx-auto">
-          {[
-            { label: 'YouTube Subscribers', value: '180K+' },
-            { label: 'Dashboards Built', value: '100+' },
-            { label: 'Years Experience', value: '10+' },
-          ].map(({ label, value }) => (
-            <motion.div
-              key={label}
-              whileHover={{ y: -5 }}
-              className="p-6 bg-gray-800 rounded-lg shadow-md hover:bg-purple-500/10 transition-colors"
-            >
-              <h3 className="text-3xl font-bold text-white mb-2">{value}</h3>
-              <p className="text-white/80">{label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </div>
-  )
-};
-
-export default About;
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="container mx-auto px-4 py-16 max-w-6xl mx-auto"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto">
-          {/* Text Section */}
-          <div className="md:w-1/2">
-            <motion.div 
-                variants={staggerItem}
-                className="text-center"
-              >
-                <h2 className="text-4xl font-bold text-white mb-8">
-                  About Me
-                </h2>
-              </motion.div>
-
-              <motion.p 
-                variants={staggerItem}
-                className="text-xl mb-4 leading-relaxed text-white/80"
-              >
-                I'm Swapnjeet S, a Senior Data Analyst with over 10 years of experience in the field. I specialize in Power BI, Tableau, SQL, and Python, and I'm passionate about turning complex data into actionable insights. Through my YouTube channel, "Data Tutorials," I've had the privilege of educating and mentoring a community of over 176K subscribers, helping aspiring data professionals navigate the world of analytics.
-              </motion.p>
-
-              <motion.div 
-                variants={staggerItem}
-                className="flex flex-wrap gap-2 mb-4"
-              >
-              {['Power BI', 'Tableau', 'SQL', 'Python'].map((tech) => (
-                <motion.span
-                  key={tech}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white/10 text-white text-sm font-medium px-3 py-1.5 rounded-full hover:bg-white/20 transition-colors"
-                >
-                  {tech}
-                </motion.span>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Image Section */}
-          <div className="md:w-2/3 flex justify-center md:justify-center">
-            <motion.div
-              variants={staggerItem}
-              whileHover={{ scale: 1.05 }}
-              className="relative mx-auto"
-            >
-              <img
-                src="/about.jpg"
-                alt="Data Expert"
-                className="rounded-xl shadow-2xl max-w-lg transition-transform duration-300"
-              />
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-10 text-center max-w-2xl mx-auto">
-          {[
-            { label: 'YouTube Subscribers', value: '180K+' },
-            { label: 'Dashboards Built', value: '100+' },
-            { label: 'Years Experience', value: '10+' },
-          ].map(({ label, value }) => (
-            <motion.div
-              key={label}
-              whileHover={{ y: -5 }}
-              className="p-6 bg-gray-800 rounded-lg shadow-md hover:bg-purple-500/10 transition-colors"
-            >
-              <h3 className="text-3xl font-bold text-white mb-2">{value}</h3>
-
-            {/* Image Section */}
-            <div className="md:w-2/3 flex justify-center md:justify-center">
-              <motion.div
-                variants={staggerItem}
-                whileHover={{ scale: 1.05 }}
-                className="relative mx-auto"
-              >
-                <img
-                  src="/about.jpg"
-                  alt="Data Expert"
-                  className="rounded-xl shadow-2xl max-w-lg transition-transform duration-300"
-                />
-              </motion.div>
             </div>
           </div>
 
-          {/* Stats Section */}
-          <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-10 text-center max-w-2xl mx-auto">
-            {[
-              { label: 'YouTube Subscribers', value: '180K+' },
-              { label: 'Dashboards Built', value: '100+' },
-              { label: 'Years Experience', value: '10+' },
-            ].map(({ label, value }) => (
-              <motion.div
-                key={label}
-                whileHover={{ y: -5 }}
-                className="p-6 bg-gray-800 rounded-lg shadow-md hover:bg-purple-500/10 transition-colors"
-              >
-                <h3 className="text-3xl font-bold text-white mb-2">{value}</h3>
-                <p className="text-white/80">{label}</p>
-              </motion.div>
-            ))}
+          {/* Optional Additional Content Block */}
+          <div className="text-purple-100 space-y-6">
+            <h3 className="text-2xl font-semibold">My Mission</h3>
+            <p className="text-sm">
+              To empower individuals and businesses to make smarter decisions by simplifying data complexity through education, tools, and visuals.
+            </p>
+            <h3 className="text-2xl font-semibold">How I Work</h3>
+            <ul className="list-disc ml-5 text-sm space-y-2">
+              <li>Understand business goals & KPIs</li>
+              <li>Build meaningful dashboards with modern tools</li>
+              <li>Train teams to be self-sufficient in analytics</li>
+            </ul>
           </div>
-        </motion.div>
+        </div>
       </div>
     </motion.div>
-  )
+  );
 };
 
 export default About;

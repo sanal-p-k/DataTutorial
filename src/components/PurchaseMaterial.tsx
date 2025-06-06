@@ -5,7 +5,6 @@ import type { PurchaseMaterialType } from '../types';
 
 interface PurchaseMaterialProps {
   material: PurchaseMaterialType;
-  slidePosition: number;
 }
 
 export const PurchaseMaterial: React.FC<PurchaseMaterialProps> = ({ material }) => {

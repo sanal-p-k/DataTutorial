@@ -463,11 +463,10 @@ const Home: React.FC = () => {
                 transform: `translateX(-${slidePosition * 100}%)`
               }}
             >
-              {purchaseMaterials.map((material, index) => (
+              {purchaseMaterials.map(material => (
                 <PurchaseMaterial
                   key={material.id}
                   material={material}
-                  slidePosition={slidePosition}
                 />
               ))}
             </div>
