@@ -52,18 +52,14 @@ const container = {
 };
 
 const item = {
-  hidden: { 
-    opacity: 0,
-    y: 20,
-    scale: 0.95
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: 'easeOut'
+      ease: "easeOut"
     }
   }
 };
@@ -95,25 +91,25 @@ const Dashboards = () => {
       variants={container}
       initial="hidden"
       animate="visible"
-      className="relative min-h-[80vh] px-4 sm:px-6 py-12 bg-gray-950 text-white"
+      className="relative min-h-[80vh] px-4 sm:px-6 pt-24 pb-12 bg-gray-950 text-white"
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src="/dashboard.jpg"
           alt="Dashboard Background"
-          className="w-full h-[80vh] object-cover object-center opacity-30"
+          className="w-full h-screen object-cover object-center opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-gray-950/70 to-purple-900/60" />
       </div>
 
       {/* Content Box */}
-      <div className="relative z-10 max-w-6xl mx-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-xl p-6 sm:p-10 md:p-16">
+      <div className="relative z-10 max-w-6xl mx-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-xl p-8 sm:p-12 md:p-16">
         <motion.div
           variants={item}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-purple-500 mb-4">Dashboard Showcase</h2>
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">Dashboard Showcase</h2>
           <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
             Explore interactive dashboards built with Power BI, Tableau, and more.
           </p>
@@ -222,7 +218,7 @@ const Dashboards = () => {
                 />
                 <div className="p-5">
                   <h3 className="text-xl font-semibold text-purple-400 mb-1">{dashboard.title}</h3>
-                  <p className="text-white/70 text-sm mb-3">{dashboard.description}</p>
+                  <p className="text-lg bg-gradient-to-r from-blue-300/80 to-blue-500/80 bg-clip-text text-transparent max-w-2xl mx-auto mb-12">{dashboard.description}</p>
                   <div className="flex flex-wrap gap-2 text-xs text-white/60">
                     {dashboard.tools.map((tool: string) => (
                       <span key={tool} className="bg-purple-700/40 px-2 py-0.5 rounded-full">

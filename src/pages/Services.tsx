@@ -72,10 +72,10 @@ const Services: React.FC = () => {
 
   return (
     <motion.div
-      variants={staggerContainer}
-      initial="initial"
-      animate="animate"
-      className="relative min-h-screen flex items-center justify-center px-6 py-20 bg-gray-950"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="relative min-h-screen flex items-center justify-center px-6 py-20 bg-gradient-to-b from-blue-900 to-gray-950"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -91,7 +91,7 @@ const Services: React.FC = () => {
       <div className="relative z-10 max-w-6xl w-full mx-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg p-10 md:p-16">
         {/* Header */}
         <motion.div variants={staggerItem} className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">My Services</h2>
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">My Services</h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
             I help teams and organizations make sense of their data by offering tailored services in analytics, education, and consulting.
           </p>
@@ -116,7 +116,7 @@ const Services: React.FC = () => {
               >
                 <service.icon className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
+              <h3 className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-1">{service.title}</h3>
               <p className="text-white/80 text-sm leading-relaxed">{service.description}</p>
             </motion.div>
           ))}

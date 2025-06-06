@@ -220,7 +220,7 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center">
+      <div className="relative min-h-screen flex items-center justify-center px-6 py-20 bg-gradient-to-b from-blue-900 to-gray-950">
         <div className="absolute inset-0">
           <img
             src="/hero.jpg"
@@ -254,7 +254,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* Skills Animation Section */}
-      <section className="py-20 bg-gradient-to-b from-purple-900 to-purple-800">
+      <section className="py-12 bg-gradient-to-b from-blue-900 to-purple-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative">
             <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-500 to-purple-700 rounded-full blur-2xl opacity-30" />
