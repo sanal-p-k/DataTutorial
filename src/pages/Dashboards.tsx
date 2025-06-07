@@ -91,7 +91,7 @@ const Dashboards = () => {
       variants={container}
       initial="hidden"
       animate="visible"
-      className="relative min-h-[80vh] px-4 sm:px-6 pt-24 pb-12 bg-gray-950 text-white"
+      className="relative min-h-[80vh] px-4 sm:px-6 pt-32 pb-12 bg-gray-950 text-white"
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
@@ -165,7 +165,7 @@ const Dashboards = () => {
       {/* Category Filter */}
       <motion.div
         variants={item}
-        className="relative z-10 max-w-6xl mx-auto mt-16 mb-10"
+        className="relative z-10 max-w-6xl mx-auto mt-20 mb-10"
       >
         <div className="flex items-center justify-center space-x-2 mb-4">
           <FilmIcon className="h-5 w-5 text-purple-400" />

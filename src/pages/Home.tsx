@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useAnimation } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaChevronLeft, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
@@ -243,7 +244,7 @@ const Home: React.FC = () => {
                   Explore Dashboards
                   <FaArrowRight className="w-5 h-5" />
                 </button>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-b from-gray-800 to-gray-900 hover:from-gray-900 hover:to-gray-950 text-white px-8 py-4 rounded-full transition duration-300 flex items-center gap-3">
+                <a href="https://www.youtube.com/@datatutorials1" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white px-8 py-4 rounded-full transition duration-300 flex items-center gap-3">
                   Watch on YouTube
                   <FaYoutube className="w-5 h-5" />
                 </a>
@@ -476,6 +477,30 @@ const Home: React.FC = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Launch Your Data Career Section */}
+      <section className="py-12 bg-gradient-to-r from-blue-900 to-purple-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row gap-8 items-center justify-center">
+            <div className="flex-1 text-center">
+              <h2 className="text-3xl font-extrabold text-white mb-4">Launch Your Data Career</h2>
+              <p className="text-white/80 max-w-md mx-auto">
+                Start your journey in data analytics and visualization with our comprehensive resources and guidance
+              </p>
+            </div>
+            <div className="flex gap-4 justify-center">
+              <Link to="/contact" className="bg-gradient-to-b from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-8 py-4 rounded-full transition duration-300 flex items-center gap-3">
+                Contact Direct
+                <FaChevronRight className="w-5 h-5" />
+              </Link>
+              <a href="https://www.youtube.com/@datatutorials1" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white px-8 py-4 rounded-full transition duration-300 flex items-center gap-3">
+                Subscribe on YouTube
+                <FaYoutube className="w-5 h-5" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
