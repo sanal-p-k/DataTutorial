@@ -13,41 +13,31 @@ const navLinks = [
 
 const Navbar = () => {
   const [isBackgroundVisible, setIsBackgroundVisible] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // NEW
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setIsMobileMenuOpen(false); // close mobile menu on route change
   }, [location.pathname]);
 
   useEffect(() => {
     let lastScroll = 0;
-
     const handleScroll = () => {
       const currentScroll = window.pageYOffset;
       setIsBackgroundVisible(currentScroll > lastScroll && currentScroll > 50);
       lastScroll = currentScroll;
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <motion.nav
-      className="fixed top-0 w-full z-50"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      {/* Full-width background container */}
+    <motion.nav className="fixed top-0 w-full z-50" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
       <div
-        className={`transition-all duration-300 ${
-          isBackgroundVisible
-            ? 'bg-white-600/95 backdrop-blur-sm shadow-lg border-b border-gray-700'
-            : 'bg-transparent'
-        }`}
+        className={`transition-all duration-300 ${isBackgroundVisible ? 'bg-white/90 backdrop-blur-sm shadow-lg border-b border-gray-700' : 'bg-transparent'
+          }`}
       >
-        {/* Centered content */}
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -62,11 +52,10 @@ const Navbar = () => {
               <span className="text-xl font-semibold text-yellow-400">Data Tutorials</span>
             </Link>
 
-            {/* Desktop nav */}
+            {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-6">
               {navLinks.map((link, index) => {
                 const isActive = location.pathname === link.path;
-
                 return (
                   <motion.div
                     key={link.name}
@@ -78,19 +67,16 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.path}
-                      className={`text-sm font-medium transition-colors ${
-                        isActive ? 'text-purple-700' : 
-                          location.pathname === '/' 
-                            ? `${isBackgroundVisible ? 'text-white/90 hover:text-purple-600' : 'text-white/90 hover:text-purple-600'}`
-                            : 'text-white/90 hover:text-purple-600'
-                      }`}
+                      className={`text-sm font-medium transition-colors ${isActive
+                          ? 'text-purple-700'
+                          : 'text-white/90 hover:text-purple-600'
+                        }`}
                     >
                       {link.name}
                     </Link>
                     <span
-                      className={`absolute left-0 -bottom-1 h-0.5 bg-purple-600 transition-all duration-300 ${
-                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                      }`}
+                      className={`absolute left-0 -bottom-1 h-0.5 bg-purple-600 transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                        }`}
                     />
                   </motion.div>
                 );
@@ -99,13 +85,38 @@ const Navbar = () => {
 
             {/* Mobile Icon */}
             <div className="md:hidden">
-              <Bars3Icon className="h-6 w-6 text-purple-400" />
+              <Bars3Icon
+                className="h-6 w-6 text-purple-400 cursor-pointer"
+                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              />
             </div>
           </div>
         </div>
+
+        {/* Mobile Nav */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-black/80 text-white px-6 py-4 space-y-3">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`block text-base font-medium ${isActive ? 'text-purple-400' : 'hover:text-purple-300'
+                    }`}
+                  onClick={() => setIsMobileMenuOpen(false)} // close menu on click
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </div>
     </motion.nav>
   );
 };
+
+
 
 export default Navbar;
