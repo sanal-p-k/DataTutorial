@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaArrowRight, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
 import {
   ChartPieIcon,
   AcademicCapIcon,
@@ -216,7 +216,7 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center justify-center px-6 py-20 bg-gradient-to-b from-blue-900 to-gray-950">
+      <div className="relative h-screen flex items-center justify-center px-4 py-8 bg-gradient-to-b from-blue-900 to-gray-950">
         <div className="absolute inset-0">
           <img
             src="/hero.jpg"
@@ -278,7 +278,7 @@ const Home: React.FC = () => {
                         className="bg-gradient-to-r from-purple-900/20 to-purple-800/25 rounded-2xl p-6 shadow-lg flex flex-col gap-4 hover:shadow-xl transition-all duration-300"
                       >
                         <div className="bg-gradient-to-r from-purple-500 to-purple-700 p-3 rounded-full">
-                          <tool.icon className="h-6 w-6 text-white" />
+                          {typeof tool.icon === 'function' ? React.createElement(tool.icon, { className: 'w-10 h-10' }) : null}
                         </div>
                         <div>
                           <h3 className="text-lg font-medium text-white">{tool.name}</h3>
@@ -340,7 +340,7 @@ const Home: React.FC = () => {
                 className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-md border border-gray-700"
               >
                 <div className="text-purple-600">
-                  <service.icon className="h-10 w-10" />
+                  {React.createElement(service.icon, { className: "w-10 h-10" })}
                 </div>
                 <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">{service.title}</h3>
                 <p className="text-white/80 mb-4 bg-gradient-to-r from-purple-300 to-purple-500 bg-clip-text text-transparent">{service.description}</p>
@@ -409,7 +409,7 @@ const Home: React.FC = () => {
                 className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-md flex flex-col items-center text-center"
               >
                 <div className="text-purple-600">
-                  <point.icon className="h-10 w-10" />
+                  {typeof point.icon === 'function' ? React.createElement(point.icon, { className: 'w-10 h-10' }) : null}
                 </div>
                 <h3 className="text-lg font-medium bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">{point.title}</h3>
                 <p className="text-white/80 mt-2 bg-gradient-to-r from-purple-300 to-purple-500 bg-clip-text text-transparent">{point.description}</p>
