@@ -16,19 +16,20 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Scroll to top and close mobile menu on route change
   useEffect(() => {
     window.scrollTo(0, 0);
+    setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Show background on scroll down after 50px
   useEffect(() => {
     let lastScroll = 0;
-
     const handleScroll = () => {
       const currentScroll = window.pageYOffset;
       setIsBackgroundVisible(currentScroll > lastScroll && currentScroll > 50);
       lastScroll = currentScroll;
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -37,7 +38,7 @@ const Navbar = () => {
     <>
       <motion.nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          isBackgroundVisible ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+          isBackgroundVisible ? 'bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200' : 'bg-transparent'
         }`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -61,7 +62,6 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link, index) => {
                 const isActive = location.pathname === link.path;
-
                 return (
                   <motion.div
                     key={link.name}
@@ -92,7 +92,8 @@ const Navbar = () => {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-md text-white/90 hover:text-purple-600"
+                className="p-2 rounded-md text-gray-800 hover:text-purple-600 focus:outline-none"
+                aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (
                   <XMarkIcon className="h-6 w-6" />
@@ -132,7 +133,8 @@ const Navbar = () => {
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-md text-gray-500 hover:text-gray-700"
+                className="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none"
+                aria-label="Close menu"
               >
                 <XMarkIcon className="h-6 w-6" />
               </button>
@@ -141,7 +143,6 @@ const Navbar = () => {
             <div className="space-y-4">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
-
                 return (
                   <Link
                     key={link.name}
