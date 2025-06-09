@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useAnimation } from 'framer-motion';
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaChevronLeft, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
+import { FaArrowRight, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
 import {
   ChartPieIcon,
   AcademicCapIcon,
@@ -154,7 +153,6 @@ const Home: React.FC = () => {
   const [inView, setInView] = useState(false);
   const [slidePosition, setSlidePosition] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
-  const [activeDot, setActiveDot] = useState(0);
   const careerPointsRef = useRef<HTMLDivElement>(null);
   const materialsLength = purchaseMaterials.length;
 
@@ -173,10 +171,7 @@ const Home: React.FC = () => {
   }, [isSliding]);
 
   // Update active dot
-  useEffect(() => {
-    const dotIndex = ((slidePosition % materialsLength) + materialsLength) % materialsLength;
-    setActiveDot(dotIndex);
-  }, [slidePosition, materialsLength]);
+
 
   const handleSwipe = (direction: 'left' | 'right') => {
     if (isSliding) return;

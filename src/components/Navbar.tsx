@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Bars3Icon } from '@heroicons/react/24/outline';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const navLinks = [
@@ -14,7 +14,6 @@ const navLinks = [
 const Navbar = () => {
   const [isBackgroundVisible, setIsBackgroundVisible] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
