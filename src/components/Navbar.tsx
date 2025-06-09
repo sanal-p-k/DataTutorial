@@ -116,7 +116,7 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <>
           <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-lg z-50"
+            className="fixed inset-0 bg-black/80 backdrop-blur-lg z-50"
             onClick={(e: React.MouseEvent) => {
               if (e.target === e.currentTarget) {
                 setIsMobileMenuOpen(false);
@@ -127,7 +127,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-0 left-0 w-full h-screen bg-white/95 backdrop-blur-xl z-50"
+            className="fixed top-0 left-0 w-full h-screen bg-black/80 backdrop-blur-xl z-50"
           >
             <div className="px-4 py-6">
               <div className="flex justify-between items-center mb-8">
