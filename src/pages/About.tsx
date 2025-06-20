@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaStar } from "react-icons/fa";
 import { FiTrendingUp, FiBook, FiCode, FiUsers } from "react-icons/fi";
