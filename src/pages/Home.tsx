@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaArrowRight, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
+import { FaArrowRight, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
 import {
   ChartPieIcon,
-  AcademicCapIcon,
-  UserGroupIcon,
-  VideoCameraIcon,
   ChartBarIcon,
-  UsersIcon
 } from '@heroicons/react/24/outline';
 import { PurchaseMaterial } from '../components/PurchaseMaterial';
 import type { PurchaseMaterialType, Service, Tool, Skill } from '../types';
@@ -93,13 +89,13 @@ const services: Service[] = [
     features: ['Interactive dashboards', 'Real-time analytics', 'Custom visualizations']
   },
   {
-    icon: UserGroupIcon,
+    icon: ChartBarIcon,
     title: 'Data Analysis',
     description: 'Comprehensive data analysis and insights extraction.',
     features: ['Data cleaning', 'Statistical analysis', 'Predictive modeling']
   },
   {
-    icon: VideoCameraIcon,
+    icon: ChartPieIcon,
     title: 'Training & Support',
     description: 'Expert training and continuous support.',
     features: ['Hands-on workshops', 'Custom training programs', '24/7 support']
@@ -108,19 +104,19 @@ const services: Service[] = [
 
 const tools: Tool[] = [
   {
-    icon: ChartBarIcon,
+    icon: ChartPieIcon,
     name: 'Power BI',
     description: 'Create interactive dashboards and reports'
   },
   {
-    icon: AcademicCapIcon,
+    icon: ChartBarIcon,
     name: 'Tableau',
     description: 'Visualize data with powerful charts and graphs'
   },
   {
     icon: FaPython,
-    name: 'Spotify Analysis',
-    description: 'Spotify Analysis using Power BI'
+    name: 'Python',
+    description: 'Data analysis and automation'
   },
   {
     icon: FaDatabase,
@@ -131,7 +127,7 @@ const tools: Tool[] = [
 
 const careerPointsData = [
   {
-    icon: AcademicCapIcon,
+    icon: ChartPieIcon,
     title: 'Learn Fundamentals',
     description: 'Master the basics of data analysis and visualization'
   },
@@ -141,7 +137,7 @@ const careerPointsData = [
     description: 'Apply your knowledge in real-world projects'
   },
   {
-    icon: UsersIcon,
+    icon: ChartPieIcon,
     title: 'Join Community',
     description: 'Connect with other data professionals'
   }
@@ -277,8 +273,8 @@ const Home: React.FC = () => {
                         whileHover={{ scale: 1.05, y: -5 }}
                         className="bg-gradient-to-r from-purple-900/20 to-purple-800/25 rounded-2xl p-6 shadow-lg flex flex-col gap-4 hover:shadow-xl transition-all duration-300"
                       >
-                        <div className="bg-gradient-to-r from-purple-500 to-purple-700 p-3 rounded-full">
-                          {typeof tool.icon === 'function' ? React.createElement(tool.icon, { className: 'w-10 h-10' }) : null}
+                        <div className="bg-gradient-to-r from-purple-500 to-purple-700 p-3 rounded-full text-white">
+                          {React.createElement(tool.icon, { className: 'w-6 h-6' })}
                         </div>
                         <div>
                           <h3 className="text-lg font-medium text-white">{tool.name}</h3>
@@ -391,6 +387,115 @@ const Home: React.FC = () => {
           <h2 className="text-3xl font-extrabold text-white text-center mb-12">Live Dashboard Example</h2>
           <div className="relative aspect-video rounded-xl overflow-hidden shadow-xl bg-gray-800 flex items-center justify-center">
             <p className="text-gray-500">Power BI Dashboard Embed Here</p>
+          </div>
+        </div>
+      </section>
+
+      {/* YouTube Videos Section */}
+      <section className="py-20 bg-gradient-to-b from-purple-900 to-blue-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">Latest Tutorials</h2>
+            <p className="mt-4 text-lg text-white/80 max-w-2xl mx-auto">Check out our latest video tutorials to enhance your data skills</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                id: 'video1',
+                title: 'India Election Analysis',
+                description: 'Learn how to create interactive dashboards in Power BI',
+                videoId: 'R5AhEuNclew',
+                embedUrl: 'https://www.youtube.com/embed/R5AhEuNclew?autoplay=1&rel=0&modestbranding=1&showinfo=0',
+                thumbnail: 'https://img.youtube.com/vi/R5AhEuNclew/maxresdefault.jpg',
+                duration: '12:34'
+              },
+              {
+                id: 'video2',
+                title: 'Tableau for Beginners',
+                description: 'Get started with Tableau and create stunning visualizations',
+                videoId: 'hXSLLttoxOA',
+                embedUrl: 'https://www.youtube.com/embed/hXSLLttoxOA?autoplay=1&rel=0&modestbranding=1&showinfo=0',
+                thumbnail: 'https://img.youtube.com/vi/hXSLLttoxOA/maxresdefault.jpg',
+                duration: '15:20'
+              },
+              {
+                id: 'video3',
+                title: 'Data Analysis Capstone',
+                description: 'Master data analysis with this comprehensive project',
+                videoId: 'kFznX8U2N3o',
+                embedUrl: 'https://www.youtube.com/embed/kFznX8U2N3o?autoplay=1&rel=0&modestbranding=1&showinfo=0',
+                thumbnail: 'https://img.youtube.com/vi/kFznX8U2N3o/maxresdefault.jpg',
+                duration: '18:45'
+              }
+            ].map((video) => {
+              const [isHovered, setIsHovered] = React.useState(false);
+              
+              return (
+                <motion.div
+                  key={video.id}
+                  className="group block overflow-hidden rounded-xl bg-gradient-to-br from-purple-800/20 to-blue-800/20 border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+                  whileHover={{ y: -5 }}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
+                  <div className="relative aspect-video overflow-hidden">
+                    {!isHovered ? (
+                      <div className="relative w-full h-full">
+                        <img 
+                          src={video.thumbnail} 
+                          alt={video.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                          <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
+                            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-2 right-2 bg-black/75 text-white text-xs px-2 py-1 rounded">
+                          {video.duration}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-full h-full">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={video.embedUrl}
+                          title={video.title}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                      {video.title}
+                    </h3>
+                    <p className="text-white/70">{video.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <a 
+              href="https://www.youtube.com/@datatutorials1" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-red-600 hover:bg-red-700 transition-colors duration-300 hover:scale-105 transform transition-transform"
+            >
+              <FaYoutube className="mr-2 text-xl" />
+              Subscribe on YouTube
+            </a>
           </div>
         </div>
       </section>
