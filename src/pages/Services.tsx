@@ -98,7 +98,7 @@ const Services: React.FC = () => {
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg p-10 md:p-16">
           {/* Header */}
           <motion.div variants={staggerItem} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">My Services</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">My Services</h2>
             <p className="text-xl text-white/80 max-w-2xl mx-auto">
               I help teams and organizations make sense of their data by offering tailored services in analytics, education, and consulting.
             </p>
@@ -123,7 +123,7 @@ const Services: React.FC = () => {
                 >
                   <service.icon className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-1">{service.title}</h3>
+                <h3 className="text-xl font-semibold text-white mb-1">{service.title}</h3>
                 <p className="text-white/80 text-sm leading-relaxed">{service.description}</p>
               </motion.div>
             ))}
@@ -231,9 +231,7 @@ const Services: React.FC = () => {
         {/* CTA Section */}
         <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg p-10 md:p-16">
           <motion.div variants={staggerItem} className="text-center mb-8">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">
-              Ready to Transform Your Data?
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Ready to Transform Your Data?</h2>
             <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
               Let's work together to unlock the full potential of your data. Whether you need a custom dashboard, training program, or strategic consultation, I'm here to help.
             </p>

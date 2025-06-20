@@ -84,7 +84,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-blue-600 font-medium">My Story</span>
-            <h2 className="text-4xl font-bold text-gray-900 mt-2 mb-4">The Journey to Data Mastery</h2>
+            <h2 className="text-4xl font-bold text-white mt-2 mb-4">The Journey to Data Mastery</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto"></div>
           </div>
 
@@ -225,9 +225,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">
-              What People Say
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What People Say</h2>
             <p className="text-white/80 max-w-2xl mx-auto">
               Feedback from clients and students
             </p>
