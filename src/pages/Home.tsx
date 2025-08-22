@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
-import {
-  ChartPieIcon,
-  ChartBarIcon,
-} from '@heroicons/react/24/outline';
+import { ChartPieIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 import { PurchaseMaterial } from '../components/PurchaseMaterial';
 import type { PurchaseMaterialType, Service, Tool, Skill } from '../types';
+import { Helmet } from 'react-helmet';
 
 // Animation variants
 const staggerContainer = {
@@ -25,9 +23,39 @@ const slideUp = {
   animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
+// SEO Metadata
+const seoData = {
+  title: 'Data Analytics Training & Mentorship | Learn from Industry Expert',
+  description: 'Master Data Analytics with expert-led training in Power BI, Tableau, SQL & Python. Join 200K+ learners and transform your career with hands-on projects and 1:1 mentorship.',
+  keywords: 'Data Analytics Mentor, Power BI Training, Tableau Certification, SQL for Data Analysts, Python Data Analysis, Business Intelligence Expert, Data Analytics Career Coach, Learn Data Analytics Online',
+  ogTitle: 'Data Analytics Training & Mentorship | 10+ Years Experience',
+  ogDescription: 'Join 200K+ learners in mastering Data Analytics with expert guidance. 4200+ mentorship sessions completed. Start your journey today!',
+  ogImage: '/images/data-analytics-mentor.jpg',
+  canonicalUrl: 'https://datatutorials.in',
+  structuredData: {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Data Analytics Training & Mentorship",
+    "description": "Master Data Analytics with expert-led training in Power BI, Tableau, SQL & Python. Transform your career with hands-on projects and 1:1 mentorship.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Swapnjeet S",
+      "jobTitle": "Data Analytics Mentor & Trainer"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://datatutorials.in"
+    }
+  }
+};
+
 // Data
 const skills: Skill[] = [
-  { name: 'Power BI', icon: <ChartPieIcon className="w-8 h-8" /> },
+  { 
+    name: 'Power BI', 
+    icon: <ChartPieIcon className="w-8 h-8" />,
+    description: 'Master data visualization and business intelligence with Power BI'
+  },
   { name: 'Tableau', icon: <ChartBarIcon className="w-8 h-8" /> },
   { name: 'Python', icon: <FaPython className="w-8 h-8" /> },
   { name: 'SQL', icon: <FaDatabase className="w-8 h-8" /> }
@@ -146,10 +174,8 @@ const careerPointsData = [
 // Component
 const Home: React.FC = () => {
   const [activeSkillIndex, setActiveSkillIndex] = useState(0);
-  const [inView, setInView] = useState(false);
   const [slidePosition, setSlidePosition] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
-  const careerPointsRef = useRef<HTMLDivElement>(null);
   const materialsLength = purchaseMaterials.length;
 
   // Handle keyboard navigation
@@ -185,23 +211,6 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setInView(entry.isIntersecting);
-      },
-      { threshold: 0.3 }
-    );
-    if (careerPointsRef.current) {
-      observer.observe(careerPointsRef.current);
-    }
-    return () => {
-      if (careerPointsRef.current) {
-        observer.unobserve(careerPointsRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
     const interval = setInterval(() => {
       setActiveSkillIndex((prev) => (prev + 1) % skills.length);
     }, 3000);
@@ -210,38 +219,173 @@ const Home: React.FC = () => {
   const LOOP_SPEED = 90; // px per second
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden">
-      {/* Hero Section - Reduced padding for smaller screens */}
-      <div className="relative min-h-[50vh] sm:min-h-screen flex items-center justify-center px-2 sm:px-4 lg:px-8 py-8 sm:py-12 lg:py-20 bg-gradient-to-b from-blue-900 to-gray-950">
-        <div className="absolute inset-0">
-          <img
-            src="/hero.jpg"
-            alt="Data Analysis Background"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50 backdrop-blur-sm" />
-        </div>
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 py-16">
-          <div className="bg-gradient-to-b from-purple-900/10 to-purple-800/15 p-12 sm:p-16 rounded-3xl backdrop-blur-xl border border-white/20 shadow-xl">
-            <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-b from-white to-blue-600 bg-clip-text text-transparent">
-                Transforming Raw Data Into Powerful Insights
-              </h1>
-              <p className="text-2xl md:text-3xl mb-8 bg-gradient-to-b from-white to-blue-500 bg-clip-text text-transparent">
-                Power BI | Tableau | SQL | Python | Analytics Education
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-gradient-to-b from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-8 py-4 rounded-full transition duration-300 flex items-center gap-3">
-                  Explore Dashboards
-                  <FaArrowRight className="w-5 h-5" />
-                </button>
-                <a href="https://www.youtube.com/@datatutorials1" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white px-8 py-4 rounded-full transition duration-300 flex items-center gap-3">
-                  Watch on YouTube
-                  <FaYoutube className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
+    <>
+      <Helmet>
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.description} />
+        <meta name="keywords" content={seoData.keywords} />
+        <meta property="og:title" content={seoData.ogTitle} />
+        <meta property="og:description" content={seoData.ogDescription} />
+        <meta property="og:image" content={seoData.ogImage} />
+        <meta property="og:url" content={seoData.canonicalUrl} />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href={seoData.canonicalUrl} />
+        <script type="application/ld+json">
+          {JSON.stringify(seoData.structuredData)}
+        </script>
+      </Helmet>
+      <div className="min-h-screen bg-gray-900 text-white overflow-x-hidden">
+      {/* Hero Section - Modern Design */}
+      <div className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900" id="home">
+        {/* Schema.org Breadcrumb */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://datatutorials.in"
+            }]
+          })}
+        </script>
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/2 -left-1/4 w-[800px] h-[800px] bg-purple-500/10 rounded-full mix-blend-soft-light blur-3xl" />
+          <div className="absolute -bottom-1/3 -right-1/4 w-[1000px] h-[1000px] bg-blue-500/10 rounded-full mix-blend-soft-light blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] opacity-30">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0VjIwYTQgNCAwIDExIDggMHYxNGg0YTIgMiAwIDExIDAgNGgtNHY0YTIgMiAwIDExLTQgMHYtNGgtNGEyIDIgMCAxMS0yLTJoNGE0IDQgMCAxMS04IDBIMjRhNCA0IDAgMTE4IDB2MTBoLTJhNCA0IDAgMTAwIDhoNnY2YTIgMiAwIDEwNCAwdjZoNmEyIDIgMCAxMDAgNGgtNnYtNmEyIDIgMCAxMC00IDB2LTZoLTJhNCA0IDAgMTAwLThoNnptMCAwVjI2aDRhMiAyIDAgMTAwLTRoLTR6Ii8+PC9nPjwvZz48L3N2Zz4=')]" />
           </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 z-10 w-full">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-center md:text-left"
+            >
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-6">
+                <span className="w-2 h-2 rounded-full bg-purple-400 mr-2 animate-pulse"></span>
+                <span className="text-sm font-medium bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  Welcome to DataTutorials
+                </span>
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+                <span className="bg-gradient-to-r from-white via-blue-100 to-purple-300 bg-clip-text text-transparent">
+                  Master Data
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  Like Never Before
+                </span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
+                Unlock the power of data with expert-led tutorials in Power BI, Tableau, SQL, and Python. Transform numbers into insights today.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <motion.a
+                  whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(124, 58, 237, 0.4)' }}
+                  whileTap={{ scale: 0.98 }}
+                  href="#get-started"
+                  className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  Start Learning Now
+                  <FaArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </motion.a>
+                
+                <motion.a
+                  whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(239, 68, 68, 0.4)' }}
+                  whileTap={{ scale: 0.98 }}
+                  href="https://www.youtube.com/@datatutorials1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  <FaYoutube className="w-5 h-5" />
+                  Watch on YouTube
+                </motion.a>
+              </div>
+              
+              <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-6">
+                {['Power BI', 'Tableau', 'SQL', 'Python'].map((tech, index) => (
+                  <motion.div
+                    key={tech}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                    className="flex items-center gap-2 bg-white/5 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10"
+                  >
+                    <div className="w-2 h-2 rounded-full bg-purple-400"></div>
+                    <span className="text-sm font-medium text-gray-200">{tech}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="relative hidden md:block"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 0, 0.2, 1] }}
+            >
+              <div className="relative z-10 w-full h-full">
+                <div className="absolute -top-6 -right-6 w-64 h-64 bg-purple-500/20 rounded-2xl rotate-12 blur-xl"></div>
+                <div className="absolute -bottom-6 -left-6 w-64 h-64 bg-blue-500/20 rounded-2xl -rotate-12 blur-xl"></div>
+                <div className="relative z-10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500"></div>
+                  <div className="mt-2 flex items-center gap-2 mb-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="bg-gray-900/80 rounded-lg p-4 font-mono text-sm text-gray-300 h-64 overflow-y-auto">
+                    <div className="text-purple-400">// Welcome to DataTutorials</div>
+                    <div className="text-blue-400">const</div> <span className="text-green-400">skills</span> = [
+                    <div className="ml-4">'Data Visualization',</div>
+                    <div className="ml-4">'Dashboard Design',</div>
+                    <div className="ml-4">'SQL Queries',</div>
+                    <div className="ml-4">'Python Analytics',</div>
+                    <div className="ml-4">'Business Intelligence'</div>
+                    ];
+                    <div className="mt-2">
+                      <span className="text-blue-400">function</span> <span className="text-yellow-400">transform</span>(<span className="text-green-400">data</span>) {
+                      <div className="ml-4"><span className="text-blue-400">return</span> <span className="text-pink-400">insights</span>;</div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Stats Bar */}
+          <motion.div 
+            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
+            {[
+              { value: '180K+', label: 'YouTube Subscribers' },
+              { value: '100+', label: 'Tutorials Created' },
+              { value: '10+', label: 'Years Experience' },
+              { value: '50K+', label: 'Students Trained' }
+            ].map((stat, index) => (
+              <div key={index} className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all">
+                <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-gray-400 mt-2">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
 
@@ -323,31 +467,39 @@ const Home: React.FC = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 bg-gray-900">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-white text-center mb-12">Our Services</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Services</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Comprehensive data solutions to transform your business</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <motion.div
                 key={service.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-md border border-gray-700"
+                whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100"
               >
-                <div className="text-purple-600">
-                  <service.icon className="h-8 sm:h-10 w-8 sm:w-10" />
+                <div className="p-6">
+                  <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
+                    <service.icon className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
+                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">{service.title}</h3>
-                <p className="text-white/80 mb-4 bg-gradient-to-r from-purple-300 to-purple-500 bg-clip-text text-transparent">{service.description}</p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-start text-white/80">
-                      <span className="text-gradient-to-r from-purple-500 to-purple-700 mr-2 mt-1">•</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
               </motion.div>
             ))}
           </div>
@@ -382,11 +534,36 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-white text-center mb-12">Live Dashboard Example</h2>
-          <div className="relative aspect-video rounded-xl overflow-hidden shadow-xl bg-gray-800 flex items-center justify-center">
-            <p className="text-gray-500">Power BI Dashboard Embed Here</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Interactive Dashboard Showcase</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Explore our sample dashboard to see the power of data visualization</p>
+          </div>
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+            <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+              <div className="flex space-x-2 px-4">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                Sales Performance Dashboard
+              </div>
+              <div className="w-24"></div>
+            </div>
+            <div className="aspect-video bg-gray-100 flex items-center justify-center">
+              <div className="text-center p-8">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 mb-4">
+                  <ChartPieIcon className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-1">Interactive Dashboard Preview</h3>
+                <p className="text-gray-500 mb-4">This is where an interactive dashboard would be embedded</p>
+                <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                  View Full Dashboard
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -501,80 +678,113 @@ const Home: React.FC = () => {
       </section>
 
       {/* Career Path Section */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-white text-center mb-12">Fastest Way to Launch Your Data Career</h2>
-          <div ref={careerPointsRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {careerPointsData.map((point, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-md flex flex-col items-center text-center"
-              >
-                <div className="text-purple-600">
-                  {typeof point.icon === 'function' ? React.createElement(point.icon, { className: 'w-10 h-10' }) : null}
-                </div>
-                <h3 className="text-lg font-medium bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">{point.title}</h3>
-                <p className="text-white/80 mt-2 bg-gradient-to-r from-purple-300 to-purple-500 bg-clip-text text-transparent">{point.description}</p>
-              </motion.div>
-            ))}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Your Path to Data Mastery</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Follow these steps to launch your data career</p>
+          </div>
+          <div className="relative">
+            <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-gray-200 -translate-x-1/2"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {careerPointsData.map((point, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                  className={`relative ${index % 2 === 0 ? 'md:mt-0' : 'md:mt-20'}`}
+                >
+                  <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 h-full flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
+                      {typeof point.icon === 'function' ? 
+                        React.createElement(point.icon, { className: 'h-8 w-8 text-blue-600' }) : 
+                        <span className="text-xl font-bold text-blue-600">{index + 1}</span>
+                      }
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{point.title}</h3>
+                    <p className="text-gray-600">{point.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Testimonial Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-purple-900">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent text-center mb-12">What Clients Say</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Hear from professionals who transformed their careers with our training</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/20 p-8 rounded-xl shadow-lg border border-white/10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center">
-                  <FaQuoteLeft className="text-white" />
+            <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                    <FaQuoteLeft className="h-5 w-5 text-blue-600" />
+                  </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">John Doe</h3>
-                  <p className="text-purple-400">Data Analyst</p>
+                  <h3 className="text-lg font-semibold text-gray-900">John Doe</h3>
+                  <p className="text-blue-600 text-sm">Data Analyst</p>
                 </div>
               </div>
-              <p className="text-white/80 italic">
-                "The dashboard development service was exceptional. They understood our business needs and delivered a solution that provided real value to our team."
+              <p className="text-gray-600 pl-16">
+                "The dashboard development training was exceptional. The instructor's practical approach and real-world examples helped me understand complex concepts quickly."
               </p>
+              <div className="flex mt-4 pl-16">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg key={star} className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
             </div>
-            <div className="bg-gradient-to-r from-purple-900/20 to-purple-800/20 p-8 rounded-xl shadow-lg border border-white/10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center">
-                  <FaQuoteLeft className="text-white" />
+            <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                    <FaQuoteLeft className="h-5 w-5 text-blue-600" />
+                  </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Jane Smith</h3>
-                  <p className="text-purple-400">Business Manager</p>
+                  <h3 className="text-lg font-semibold text-gray-900">Jane Smith</h3>
+                  <p className="text-blue-600 text-sm">Business Intelligence Manager</p>
                 </div>
               </div>
-              <p className="text-white/80 italic">
-                "Our team's data skills improved dramatically after the training sessions. The instructor was knowledgeable and made complex concepts easy to understand."
+              <p className="text-gray-600 pl-16">
+                "The SQL and Power BI courses transformed how we analyze data. We've been able to make data-driven decisions faster and more accurately."
               </p>
+              <div className="flex mt-4 pl-16">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <svg key={star} className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Client Logos Section */}
-      <section className="py-16 bg-gray-900">
+      <section className="py-16 bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-white text-center mb-12">Trusted By</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Trusted By Industry Leaders</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Join thousands of professionals from top companies who trust our training</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+            {['Microsoft', 'Google', 'Amazon', 'IBM', 'Accenture', 'Deloitte'].map((company) => (
               <motion.div
-                key={item}
-                whileHover={{ scale: 1.1 }}
-                className="opacity-70 hover:opacity-100 transition-opacity flex items-center justify-center"
+                key={company}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center justify-center p-4 bg-gray-50 rounded-lg h-24"
               >
-                <div className="w-24 h-24 bg-gray-800 rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-white/80 font-medium">Client {item}</span>
-                </div>
+                <span className="text-xl font-semibold text-gray-700">{company}</span>
               </motion.div>
             ))}
           </div>
@@ -605,6 +815,7 @@ const Home: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

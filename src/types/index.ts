@@ -31,4 +31,5 @@ export interface Tool {
 export interface Skill {
   name: string;
   icon: React.ReactElement;
+  description?: string;
 }

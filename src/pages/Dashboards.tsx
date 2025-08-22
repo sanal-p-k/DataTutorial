@@ -1,48 +1,53 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FilmIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import { FaDatabase, FaArrowRight } from 'react-icons/fa';
+import { ChartPieIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
-const dashboardCategories = [
-  'Finance',
-  'HR',
-  'Sales',
-  'Education',
-  'Marketing',
-  'Healthcare'
-];
-
-const dashboards = [
+// Purchase Materials Data
+const purchaseMaterials = [
   {
     id: 1,
-    title: 'Sales Performance Dashboard',
-    category: 'Sales',
-    image: '/dashboard-sales.jpg',
-    description: 'Track your sales performance with real-time metrics and KPIs',
-    tools: ['Power BI', 'SQL', 'Python']
+    title: 'Data Analytics Complete Material',
+    description: 'Professional templates for various business scenarios',
+    icon: <FaDatabase className="h-6 w-6 text-white" />,
+    features: ['30+ Material', '$15'],
+    image: 'data_analytics_roadmap.png',
+    price: '$15'
   },
   {
     id: 2,
-    title: 'HR Analytics Dashboard',
-    category: 'HR',
-    image: '/dashboard-hr.jpg',
-    description: 'Analyze employee data and workforce metrics',
-    tools: ['Tableau', 'Excel', 'Power BI']
+    title: 'Power BI Projects',
+    description: 'Real-world project templates and solutions',
+    icon: <ChartPieIcon className="h-6 w-6 text-white" />,
+    features: ['20+ Projects', '$20'],
+    image: 'powerbi.png',
+    price: '$20'
   },
   {
     id: 3,
-    title: 'Financial Dashboard',
-    category: 'Finance',
-    image: '/dashboard-finance.jpg',
-    description: 'Monitor financial health and key metrics',
-    tools: ['Power BI', 'SQL']
+    title: 'Tableau Workbooks',
+    description: 'Interactive dashboards and visualizations',
+    icon: <ChartBarIcon className="h-6 w-6 text-white" />,
+    features: ['15+ Workbooks', '$18'],
+    image: 'tableau.png',
+    price: '$18'
   },
-  // Add more dashboards as needed
+  {
+    id: 4,
+    title: 'SQL Mastery Kit',
+    description: 'Advanced SQL queries and database solutions',
+    icon: <FaDatabase className="h-6 w-6 text-white" />,
+    features: ['50+ Queries', '$25'],
+    image: 'sql.png',
+    price: '$25'
+  }
 ];
 
+// Animation variants
 const container = {
-  hidden: { opacity: 0 },
-  visible: { 
+  initial: { opacity: 0 },
+  animate: { 
     opacity: 1,
     transition: {
       staggerChildren: 0.2,
@@ -51,12 +56,11 @@ const container = {
   }
 };
 
-const item = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: { 
+const staggerItem = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
     opacity: 1, 
-    y: 0, 
-    scale: 1,
+    y: 0,
     transition: {
       duration: 0.6,
       ease: "easeOut"
@@ -64,175 +68,342 @@ const item = {
   }
 };
 
-const button = {
-  hidden: { 
-    opacity: 0,
-    x: -20
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut'
-    }
-  }
+// Helper function to get image path based on tool name
+const getToolImage = (tool: string) => {
+  const toolImages: {[key: string]: string} = {
+    'Power BI': '/images/purchase/powerbi.png',
+    'Tableau': '/images/purchase/tableau.png',
+    'SQL': '/images/purchase/sql.png',
+    'Excel': '/images/purchase/excel.png',
+    'Python': '/images/purchase/python.png',
+    'Google Analytics': '/images/placeholder.jpg',
+    'HRIS': '/images/placeholder.jpg',
+    'SAP': '/images/placeholder.jpg',
+    'CRM': '/images/placeholder.jpg'
+  };
+  return toolImages[tool] || '/images/placeholder.jpg';
 };
+
+const dashboards = [
+  {
+    id: 1,
+    title: 'Sales Performance',
+    category: 'Sales',
+    description: 'Track revenue, deals, and sales team performance with interactive visualizations and real-time metrics.',
+    tools: ['Power BI', 'SQL', 'Excel'],
+    color: 'from-blue-500 to-indigo-600',
+    image: '/images/purchase/powerbi.png'
+  },
+  {
+    id: 2,
+    title: 'Marketing Analytics',
+    category: 'Marketing',
+    description: 'Analyze campaign performance, ROI, and customer engagement across multiple channels.',
+    tools: ['Tableau', 'Google Analytics', 'Excel'],
+    color: 'from-purple-500 to-pink-600',
+    image: '/images/purchase/tableau.png'
+  },
+  {
+    id: 3,
+    title: 'Financial Overview',
+    category: 'Finance',
+    description: 'Comprehensive view of financial health, expenses, revenue, and profitability metrics.',
+    tools: ['Power BI', 'Excel', 'SQL'],
+    color: 'from-emerald-500 to-teal-600',
+    image: '/images/purchase/excel.png'
+  },
+  {
+    id: 4,
+    title: 'HR Analytics',
+    category: 'HR',
+    description: 'Track employee performance, engagement, and workforce planning metrics.',
+    tools: ['Tableau', 'HRIS', 'Power BI'],
+    color: 'from-amber-500 to-orange-600',
+    image: '/images/placeholder.jpg'
+  },
+  {
+    id: 5,
+    title: 'Supply Chain',
+    category: 'Operations',
+    description: 'Monitor inventory, logistics, and supply chain performance in real-time.',
+    tools: ['Power BI', 'SAP', 'SQL'],
+    color: 'from-rose-500 to-red-600',
+    image: '/images/placeholder.jpg'
+  },
+  {
+    id: 6,
+    title: 'Customer Success',
+    category: 'Operations',
+    description: 'Track customer health, satisfaction, and success metrics.',
+    tools: ['Tableau', 'CRM', 'Power BI'],
+    color: 'from-violet-500 to-fuchsia-600',
+    image: '/images/placeholder.jpg'
+  }
+];
+
+const categories = ['All', 'Sales', 'Marketing', 'Finance', 'HR', 'Operations'];
 
 const Dashboards = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const filteredDashboards =
-    selectedCategory === 'All'
-      ? dashboards
-      : dashboards.filter((d) => d.category === selectedCategory);
+
+  const getCategoryColor = (category: string) => {
+    const colors: { [key: string]: string } = {
+      'Sales': 'bg-blue-100 text-blue-800',
+      'Marketing': 'bg-purple-100 text-purple-800',
+      'Finance': 'bg-green-100 text-green-800',
+      'HR': 'bg-amber-100 text-amber-800',
+      'Operations': 'bg-rose-100 text-rose-800',
+      'All': 'bg-gray-100 text-gray-800'
+    };
+    return colors[category] || 'bg-gray-100 text-gray-800';
+  };
+
+  const filteredDashboards = selectedCategory === 'All' 
+    ? dashboards 
+    : dashboards.filter(d => d.category === selectedCategory);
 
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      className="relative min-h-[80vh] px-4 sm:px-6 pt-32 pb-12 bg-gray-950 text-white"
-    >
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/dashboard.jpg"
-          alt="Dashboard Background"
-          className="w-full h-screen object-cover object-center opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950/70 to-purple-900/60" />
-      </div>
-
-      {/* Content Box */}
-      <div className="relative z-10 max-w-6xl mx-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-xl p-8 sm:p-12 md:p-16">
-        <motion.div
-          variants={item}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">Dashboard Showcase</h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
-            Explore interactive dashboards built with Power BI, Tableau, and more.
-          </p>
-        </motion.div>
-
-        {/* Tool Info Cards */}
-        <motion.div
-          variants={container}
-          className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-16"
-        >
-          <motion.div
-            variants={item}
-            whileHover={{ scale: 1.02 }}
-            className="bg-gray-800 rounded-xl p-6"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h4 className="text-xl font-semibold text-white">Power BI</h4>
-              <span className="px-2 py-0.5 text-xs bg-purple-100 text-purple-800 rounded-full">Microsoft</span>
-            </div>
-            <p className="text-gray-400 mb-4">
-              Power BI is a business analytics service by Microsoft. It connects to hundreds of data sources,
-              simplifies data prep, and provides rich dashboards and natural language queries.
-            </p>
-            <div className="flex items-center space-x-3 text-sm text-white/70">
-              <span>Cloud</span>
-              <span>Enterprise</span>
-              <span>AI</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={item}
-            whileHover={{ scale: 1.02 }}
-            className="bg-gray-800 rounded-xl p-6"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h4 className="text-xl font-semibold text-white">Tableau</h4>
-              <span className="px-2 py-0.5 text-xs bg-purple-100 text-purple-800 rounded-full">Salesforce</span>
-            </div>
-            <p className="text-gray-400 mb-4">
-              Tableau helps people see and understand data. Connect to nearly any database, drag and drop
-              to analyze, and share your work easily.
-            </p>
-            <div className="flex items-center space-x-3 text-sm text-white/70">
-              <span>Visualization</span>
-              <span>Analytics</span>
-              <span>Reporting</span>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Category Filter */}
-      <motion.div
-        variants={item}
-        className="relative z-10 max-w-6xl mx-auto mt-20 mb-10"
-      >
-        <div className="flex items-center justify-center space-x-2 mb-4">
-          <FilmIcon className="h-5 w-5 text-purple-400" />
-          <span className="text-sm text-white/60">Filter by category</span>
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/2 -left-1/4 w-[800px] h-[800px] bg-purple-500/10 rounded-full mix-blend-soft-light blur-3xl" />
+          <div className="absolute -bottom-1/3 -right-1/4 w-[1000px] h-[1000px] bg-blue-500/10 rounded-full mix-blend-soft-light blur-3xl" />
         </div>
-        <div className="flex justify-center flex-wrap gap-3">
-          {['All', ...dashboardCategories].map((category, index) => (
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+          <motion.div
+            initial="initial"
+            animate="animate"
+            variants={container}
+            className="text-center relative z-10"
+          >
+            <motion.div variants={staggerItem} className="mb-8">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-6">
+                <span className="w-2 h-2 rounded-full bg-purple-400 mr-2 animate-pulse"></span>
+                <span className="text-sm font-medium bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  Dashboard Portfolio
+                </span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+                <span className="bg-gradient-to-r from-white via-blue-100 to-purple-300 bg-clip-text text-transparent">
+                  Interactive Dashboards
+                </span>
+              </h1>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Transform your data into actionable insights with our interactive dashboard solutions
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Category Filter */}
+        <motion.div 
+          variants={container}
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
+          {categories.map((category, index) => (
             <motion.button
-              variants={button}
-              custom={index}
               key={category}
-              whileHover={{ scale: 1.05 }}
+              variants={staggerItem}
+              custom={index}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition ${
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                 selectedCategory === category
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-white text-gray-800 hover:bg-purple-100'
+                  ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-gray-300'
               }`}
             >
               {category}
             </motion.button>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Dashboard Cards Grid */}
-      <motion.div
-        variants={container}
-        className="relative z-10 max-w-6xl mx-auto mt-16"
-      >
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredDashboards.map((dashboard, i) => (
+        {/* Dashboard Grid */}
+        <motion.div
+          variants={container}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {filteredDashboards.map((dashboard, index) => (
             <motion.div
               key={dashboard.id}
-              custom={i}
-              variants={item}
-              initial="hidden"
-              animate="visible"
-              whileHover={{ y: -4 }}
-              className="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition"
+              variants={staggerItem}
+              custom={index}
+              className="h-full"
             >
-              <Link to={`/dashboard/${dashboard.id}`}>
-                <img
-                  src={dashboard.image}
-                  alt={dashboard.title}
-                  className="w-full h-48 object-cover"
-                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                    e.currentTarget.src = '/placeholder.jpg';
-                  }}
-                />
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold text-purple-400 mb-1">{dashboard.title}</h3>
-                  <p className="text-lg bg-gradient-to-r from-blue-300/80 to-blue-500/80 bg-clip-text text-transparent max-w-2xl mx-auto mb-12">{dashboard.description}</p>
-                  <div className="flex flex-wrap gap-2 text-xs text-white/60">
-                    {dashboard.tools.map((tool: string) => (
-                      <span key={tool} className="bg-purple-700/40 px-2 py-0.5 rounded-full">
-                        {tool}
-                      </span>
-                    ))}
+              <Link 
+                to={`/dashboards/${dashboard.id}`}
+                className="block h-full"
+              >
+                <div className="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                  {/* Dashboard Preview Image */}
+                  <div className="relative h-40 bg-gray-100 overflow-hidden">
+                    <img 
+                      src={dashboard.image} 
+                      alt={dashboard.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = '/images/placeholder.jpg';
+                      }}
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${dashboard.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
+                    <div className="absolute bottom-3 right-3 flex -space-x-1">
+                      {dashboard.tools.slice(0, 3).map((tool, i) => (
+                        <div 
+                          key={i}
+                          className="w-6 h-6 rounded-full bg-white border-2 border-white shadow-md overflow-hidden"
+                          title={tool}
+                        >
+                          <img 
+                            src={getToolImage(tool)} 
+                            alt={tool}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = '/images/placeholder.jpg';
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="p-6 flex flex-col flex-grow">
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(dashboard.category)} w-fit mb-3`}>
+                      {dashboard.category}
+                    </span>
+                    
+                    <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-indigo-600 transition-colors">
+                      {dashboard.title}
+                    </h3>
+                    
+                    <p className="text-gray-600 mb-5 flex-grow">{dashboard.description}</p>
+                    
+                    <div className="w-full mt-auto py-2.5 px-4 bg-gradient-to-r from-indigo-50 to-blue-50 text-indigo-600 text-sm font-medium rounded-lg group-hover:from-indigo-100 group-hover:to-blue-100 transition-all duration-300 flex items-center justify-center border border-indigo-100">
+                      Explore Dashboard
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </Link>
             </motion.div>
           ))}
+        </motion.div>
+      </div>
+
+      {/* Purchase Section */}
+      <div className="bg-gradient-to-r from-indigo-50 to-blue-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Premium Learning Materials</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Enhance your skills with our professionally curated materials and templates
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {purchaseMaterials.map((material, index) => (
+              <motion.div
+                key={material.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+              >
+                <div className="relative h-40 bg-gray-100 overflow-hidden">
+                  <img 
+                    src={`/images/purchase/${material.image}`} 
+                    alt={material.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/images/placeholder.jpg';
+                    }}
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+                    <div className="flex items-center justify-between">
+                      <span className="text-white font-medium">{material.price}</span>
+                      <div className="flex -space-x-1">
+                        {material.features.map((feature, i) => (
+                          <span 
+                            key={i}
+                            className="bg-white/20 text-white text-xs px-2 py-1 rounded-full backdrop-blur-sm"
+                          >
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-2 rounded-lg">
+                      {material.icon}
+                    </div>
+                    <span className="text-sm font-medium text-indigo-600">Premium</span>
+                  </div>
+                  
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{material.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4 flex-grow">{material.description}</p>
+                  
+                  <a 
+                    href="https://topmate.io/data_tutorials" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="mt-4 w-full py-2 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    Get Access
+                    <FaArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-gradient-to-r from-gray-900 to-gray-800 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h2 
+            variants={staggerItem}
+            className="text-3xl font-bold text-white mb-4"
+          >
+            Need a Custom Dashboard?
+          </motion.h2>
+          <motion.p 
+            variants={staggerItem}
+            className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto"
+          >
+            Let's create a tailored analytics solution for your business needs.
+          </motion.p>
+          <motion.div variants={staggerItem}>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-blue-700 bg-white hover:bg-gray-100 md:py-3 md:text-lg md:px-8 transition-all duration-300 transform hover:-translate-y-0.5"
+            >
+              Get in Touch
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </div>
   );
 };
 
