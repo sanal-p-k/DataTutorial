@@ -8,7 +8,6 @@ import {
 import {
   FaYoutube,
   FaLinkedin,
-  FaTwitter,
   FaInstagram,
 } from 'react-icons/fa';
 
@@ -50,15 +49,15 @@ export const Footer = () => {
             <ul className="space-y-2 text-sm text-white-400">
               <li className="flex items-center space-x-2">
                 <MailIcon className="h-4 w-4" />
-                <span>swapnjeet@datatutorials.io</span>
+                <span>swapnjeet555@gmail.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <PhoneIcon className="h-4 w-4" />
-                <span>+91 98765 43210</span>
+                <span>+91 95790 05495 (Whatsapp only)</span>
               </li>
               <li className="flex items-center space-x-2">
                 <GlobeAltIcon className="h-4 w-4" />
-                <span>www.datatutorials.io</span>
+                <span>www.datatutorials.com</span>
               </li>
             </ul>
           </div>
@@ -72,9 +71,6 @@ export const Footer = () => {
               </a>
               <a href="https://linkedin.com/in/datatutorials" target="_blank" rel="noopener noreferrer" className="hover:text-purple-800 transition-colors">
                 <FaLinkedin size={20} />
-              </a>
-              <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-800 transition-colors">
-                <FaTwitter size={20} />
               </a>
               <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-800 transition-colors">
                 <FaInstagram size={20} />

@@ -101,24 +101,63 @@ const expertise = [
 
 const testimonials = [
   {
-    id: 1,
-    name: 'John D.',
-    role: 'Data Analyst at TechCorp',
-    content: 'The mentorship I received completely transformed my career. The practical approach and real-world projects gave me the confidence to excel in my role.',
+    name: 'Rahul Sharma',
+    role: 'Senior Data Analyst',
+    content: 'The Power BI training transformed how I approach data visualization. The practical examples and real-world scenarios made complex concepts easy to understand and implement.',
     rating: 5
   },
   {
-    id: 2,
-    name: 'Sarah M.',
-    role: 'Business Intelligence Developer',
-    content: 'The training materials are top-notch and the 1:1 sessions provided invaluable insights that I couldn\'t have gotten from online courses alone.',
+    name: 'Priya Patel',
+    role: 'Business Intelligence Lead',
+    content: 'Exceptional SQL training! The course structure and hands-on exercises helped me optimize our database queries, reducing report generation time by 60%.',
     rating: 5
   },
   {
-    id: 3,
-    name: 'Alex K.',
-    role: 'Career Changer',
-    content: 'As someone transitioning into data analytics, the structured learning path and mentor support made all the difference in landing my first role.',
+    name: 'Michael Johnson',
+    role: 'Data Scientist',
+    content: 'The Python for Data Analysis course provided exactly what I needed to transition from research to industry. The mentorship was invaluable in helping me understand real-world applications.',
+    rating: 5
+  },
+  {
+    name: 'Ananya Gupta',
+    role: 'Data Engineer',
+    content: 'The ETL process training was comprehensive and immediately applicable. I was able to implement what I learned to streamline our data pipeline in just two weeks.',
+    rating: 4
+  },
+  {
+    name: 'David Wilson',
+    role: 'Analytics Manager',
+    content: 'The Tableau training helped my team create more impactful dashboards. The instructor\'s industry experience brought a practical perspective that you won\'t find in standard courses.',
+    rating: 5
+  },
+  {
+    name: 'Sanjay Mehta',
+    role: 'BI Consultant',
+    content: 'The data modeling concepts I learned helped me design more efficient data warehouses. The training paid for itself within the first month of implementation.',
+    rating: 5
+  },
+  {
+    name: 'Neha Reddy',
+    role: 'Data Analyst',
+    content: 'The Power BI DAX training was game-changing. I can now create complex calculations and measures that have significantly improved our reporting capabilities.',
+    rating: 5
+  },
+  {
+    name: 'Amit Kumar',
+    role: 'Senior Manager - Analytics',
+    content: 'The training provided practical insights that I could immediately apply to improve our data governance framework. The instructor\'s expertise in the field was evident.',
+    rating: 4
+  },
+  {
+    name: 'Sophie Martin',
+    role: 'Data Visualization Expert',
+    content: 'The advanced visualization techniques I learned helped me create more impactful dashboards. The course materials were well-structured and easy to follow.',
+    rating: 5
+  },
+  {
+    name: 'Vikram Singh',
+    role: 'Lead Data Analyst',
+    content: 'The end-to-end data analytics training covered everything from data cleaning to advanced visualization. The hands-on projects were particularly valuable for my professional development.',
     rating: 5
   }
 ];
@@ -179,15 +218,15 @@ const About = () => {
               className="flex flex-col sm:flex-row justify-center gap-4 mt-8"
             >
               <motion.a
-                href="#contact"
+                href="/Contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2"
               >
-                Get Started <FaChevronRight className="w-4 h-4" />
+                Connect with me <FaChevronRight className="w-4 h-4" />
               </motion.a>
               <motion.a
-                href="https://youtube.com/@datatutorials"
+                href="https://youtube.com/@datatutorials1"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
@@ -232,7 +271,7 @@ const About = () => {
             >
               <div className="relative">
                 <img 
-                  src="/images/about-mentor.jpg" 
+                  src="/about.jpg" 
                   alt="Data Analytics Mentor"
                   className="rounded-xl shadow-2xl"
                 />
@@ -494,43 +533,6 @@ const About = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-purple-700">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl shadow-xl">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Start Your Data Journey Today
-            </h2>
-            <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-8">
-              Join thousands of professionals who've accelerated their careers with our expert-led training programs
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a 
-                href="https://youtube.com/@datatutorials" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
-              >
-                <FaYoutube className="w-5 h-5" />
-                Watch Free Tutorials
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/datatutorials/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-white text-blue-700 font-medium rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <FaLinkedin className="w-5 h-5" />
-                Connect for Mentorship
-              </a>
-            </div>
-            <p className="mt-6 text-sm text-blue-100">
-              Join our community of 200K+ data enthusiasts
-            </p>
           </div>
         </div>
       </section>

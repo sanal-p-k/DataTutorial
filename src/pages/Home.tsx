@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaChevronRight, FaDatabase, FaPython, FaQuoteLeft, FaYoutube } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { ChartPieIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 import { PurchaseMaterial } from '../components/PurchaseMaterial';
 import type { PurchaseMaterialType, Service, Tool, Skill } from '../types';
@@ -58,7 +63,7 @@ const skills: Skill[] = [
   },
   { name: 'Tableau', icon: <ChartBarIcon className="w-8 h-8" /> },
   { name: 'Python', icon: <FaPython className="w-8 h-8" /> },
-  { name: 'SQL', icon: <FaDatabase className="w-8 h-8" /> }
+  { name: 'SQL', icon: <FaDatabase className="w-8 h-8" /> },
 ];
 
 const purchaseMaterials: PurchaseMaterialType[] = [
@@ -67,45 +72,40 @@ const purchaseMaterials: PurchaseMaterialType[] = [
     title: 'Data Analytics Complete Material',
     description: 'Professional templates for various business scenarios',
     icon: <FaDatabase className="h-6 w-6 text-white" />,
-    features: ['30+ Material', '$15'],
-    image: 'data_analytics_roadmap.png',
-    price: '$15'
+    features: ['30+ Material'],
+    image: 'data_analytics_roadmap.png'
   },
   {
     id: 2,
     title: 'Power BI Projects',
     description: 'Real-world project templates and solutions',
     icon: <ChartPieIcon className="h-6 w-6 text-white" />,
-    features: ['20+ Projects', '$20'],
-    image: 'powerbi.png',
-    price: '$20'
+    features: ['20+ Projects'],
+    image: 'powerbi.png'
   },
   {
     id: 3,
     title: 'Tableau Workbooks',
     description: 'Interactive dashboards and visualizations',
     icon: <ChartBarIcon className="h-6 w-6 text-white" />,
-    features: ['15+ Workbooks', '$18'],
-    image: 'tableau.png',
-    price: '$18'
+    features: ['15+ Workbooks'],
+    image: 'tableau.png'
   },
   {
     id: 4,
     title: 'SQL Training Package',
     description: 'Comprehensive SQL learning materials',
     icon: <FaDatabase className="h-6 w-6 text-white" />,
-    features: ['50+ Queries', '$12'],
-    image: 'sql.png',
-    price: '$12'
+    features: ['50+ Queries'],
+    image: 'sql.png'
   },
   {
     id: 5,
     title: 'Spotify Analysis',
     description: 'Spotify Analysis using Power BI',
     icon: <FaPython className="h-6 w-6 text-white" />,
-    features: ['40+ Scripts', '$16'],
-    image: 'python.png',
-    price: '$16'
+    features: ['40+ Scripts'],
+    image: 'python.png'
   }
 ];
 
@@ -286,14 +286,14 @@ const Home: React.FC = () => {
               </h1>
               
               <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
-                Unlock the power of data with expert-led tutorials in Power BI, Tableau, SQL, and Python. Transform numbers into insights today.
+                Unlock the power of data with expert-led tutorials in Power BI, Tableau, SQL, and Python. Transform data into insights today.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <motion.a
                   whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(124, 58, 237, 0.4)' }}
                   whileTap={{ scale: 0.98 }}
-                  href="#get-started"
+                  href="Contact"
                   className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
                 >
                   Start Learning Now
@@ -314,7 +314,7 @@ const Home: React.FC = () => {
               </div>
               
               <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-6">
-                {['Power BI', 'Tableau', 'SQL', 'Python'].map((tech, index) => (
+                {['Power BI', 'Tableau', 'SQL', 'Python','Excel'].map((tech, index) => (
                   <motion.div
                     key={tech}
                     initial={{ opacity: 0, y: 20 }}
@@ -348,10 +348,11 @@ const Home: React.FC = () => {
                   <div className="bg-gray-900/80 rounded-lg p-4 font-mono text-sm text-gray-300 h-64 overflow-y-auto">
                     <div className="text-purple-400">// Welcome to DataTutorials</div>
                     <div className="text-blue-400">const</div> <span className="text-green-400">skills</span> = [
-                    <div className="ml-4">'Data Visualization',</div>
-                    <div className="ml-4">'Dashboard Design',</div>
-                    <div className="ml-4">'SQL Queries',</div>
-                    <div className="ml-4">'Python Analytics',</div>
+                    <div className="ml-4">'Power BI',</div>
+                    <div className="ml-4">'Tableau',</div>
+                    <div className="ml-4">'Excel',</div>
+                    <div className="ml-4">'SQL',</div>
+                    <div className="ml-4">'Python',</div>
                     <div className="ml-4">'Business Intelligence'</div>
                     ];
                     <div className="mt-2">
@@ -373,10 +374,10 @@ const Home: React.FC = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
           >
             {[
-              { value: '180K+', label: 'YouTube Subscribers' },
-              { value: '100+', label: 'Tutorials Created' },
+              { value: '200K+', label: 'YouTube Subscribers' },
+              { value: '500+', label: 'Tutorials Created' },
               { value: '10+', label: 'Years Experience' },
-              { value: '50K+', label: 'Students Trained' }
+              { value: '80K+', label: 'Students Trained' }
             ].map((stat, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all">
                 <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
@@ -589,11 +590,11 @@ const Home: React.FC = () => {
               },
               {
                 id: 'video2',
-                title: 'Tableau for Beginners',
-                description: 'Get started with Tableau and create stunning visualizations',
+                title: 'Data Analyst Roadmap',
+                description: 'Data Analyst Roadmap 2025',
                 videoId: 'hXSLLttoxOA',
-                embedUrl: 'https://www.youtube.com/embed/hXSLLttoxOA?autoplay=1&rel=0&modestbranding=1&showinfo=0',
-                thumbnail: 'https://img.youtube.com/vi/hXSLLttoxOA/maxresdefault.jpg',
+                embedUrl: 'https://www.youtube.com/embed/GrJQLWTGXO4?si=0aIlvUNinsm6D_JX',
+                thumbnail: 'https://i.ytimg.com/vi/GrJQLWTGXO4/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBwffsh9byuLj1J5yOBE-aNheGJiQ',
                 duration: '15:20'
               },
               {
@@ -719,77 +720,119 @@ const Home: React.FC = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">Hear from professionals who transformed their careers with our training</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                    <FaQuoteLeft className="h-5 w-5 text-blue-600" />
+          
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            navigation
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            breakpoints={{
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+            }}
+            className="pb-12"
+          >
+            {[
+              {
+                name: 'Rahul Sharma',
+                role: 'Senior Data Analyst',
+                content: 'The Power BI training transformed how I approach data visualization. The practical examples and real-world scenarios made complex concepts easy to understand and implement.',
+                rating: 5
+              },
+              {
+                name: 'Priya Patel',
+                role: 'Business Intelligence Lead',
+                content: 'Exceptional SQL training! The course structure and hands-on exercises helped me optimize our database queries, reducing report generation time by 60%.',
+                rating: 5
+              },
+              {
+                name: 'Michael Johnson',
+                role: 'Data Scientist',
+                content: 'The Python for Data Analysis course provided exactly what I needed to transition from research to industry. The mentorship was invaluable in helping me understand real-world applications.',
+                rating: 5
+              },
+              {
+                name: 'Ananya Gupta',
+                role: 'Data Engineer',
+                content: 'The ETL process training was comprehensive and immediately applicable. I was able to implement what I learned to streamline our data pipeline in just two weeks.',
+                rating: 4
+              },
+              {
+                name: 'David Wilson',
+                role: 'Analytics Manager',
+                content: 'The Tableau training helped my team create more impactful dashboards. The instructor\'s industry experience brought a practical perspective that you won\'t find in standard courses.',
+                rating: 5
+              },
+              {
+                name: 'Sanjay Mehta',
+                role: 'BI Consultant',
+                content: 'The data modeling concepts I learned helped me design more efficient data warehouses. The training paid for itself within the first month of implementation.',
+                rating: 5
+              },
+              {
+                name: 'Neha Reddy',
+                role: 'Data Analyst',
+                content: 'The Power BI DAX training was game-changing. I can now create complex calculations and measures that have significantly improved our reporting capabilities.',
+                rating: 5
+              },
+              {
+                name: 'Amit Kumar',
+                role: 'Senior Manager - Analytics',
+                content: 'The training provided practical insights that I could immediately apply to improve our data governance framework. The instructor\'s expertise in the field was evident.',
+                rating: 4
+              },
+              {
+                name: 'Sophie Martin',
+                role: 'Data Visualization Expert',
+                content: 'The advanced visualization techniques I learned helped me create more impactful dashboards. The course materials were well-structured and easy to follow.',
+                rating: 5
+              },
+              {
+                name: 'Vikram Singh',
+                role: 'Lead Data Analyst',
+                content: 'The end-to-end data analytics training covered everything from data cleaning to advanced visualization. The hands-on projects were particularly valuable for my professional development.',
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100 h-full flex flex-col">
+                  <div className="flex-grow">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                          <FaQuoteLeft className="h-5 w-5 text-blue-600" />
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900">{testimonial.name}</h3>
+                        <p className="text-blue-600 text-sm">{testimonial.role}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 mb-4 relative">
+                      <FaQuoteLeft className="text-gray-200 text-4xl absolute -top-2 -left-2 -z-10" />
+                      {testimonial.content}
+                    </p>
+                  </div>
+                  <div className="flex mt-auto">
+                    {[...Array(5)].map((_, i) => (
+                      <svg 
+                        key={i} 
+                        className={`h-5 w-5 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`} 
+                        fill="currentColor" 
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">John Doe</h3>
-                  <p className="text-blue-600 text-sm">Data Analyst</p>
-                </div>
-              </div>
-              <p className="text-gray-600 pl-16">
-                "The dashboard development training was exceptional. The instructor's practical approach and real-world examples helped me understand complex concepts quickly."
-              </p>
-              <div className="flex mt-4 pl-16">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <svg key={star} className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                    <FaQuoteLeft className="h-5 w-5 text-blue-600" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">Jane Smith</h3>
-                  <p className="text-blue-600 text-sm">Business Intelligence Manager</p>
-                </div>
-              </div>
-              <p className="text-gray-600 pl-16">
-                "The SQL and Power BI courses transformed how we analyze data. We've been able to make data-driven decisions faster and more accurately."
-              </p>
-              <div className="flex mt-4 pl-16">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <svg key={star} className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-            </div>
-          </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </section>
 
-      {/* Client Logos Section */}
-      <section className="py-16 bg-white border-t border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Trusted By Industry Leaders</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Join thousands of professionals from top companies who trust our training</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-            {['Microsoft', 'Google', 'Amazon', 'IBM', 'Accenture', 'Deloitte'].map((company) => (
-              <motion.div
-                key={company}
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center justify-center p-4 bg-gray-50 rounded-lg h-24"
-              >
-                <span className="text-xl font-semibold text-gray-700">{company}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Launch Your Data Career Section */}
       <section className="py-12 bg-gradient-to-r from-blue-900 to-purple-900">

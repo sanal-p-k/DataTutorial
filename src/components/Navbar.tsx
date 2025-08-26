@@ -8,7 +8,7 @@ const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
   { name: 'Services', path: '/services' },
-  { name: 'Dashboards', path: '/dashboards' },
+  { name: 'Resources', path: '/dashboards' },
   { name: 'Contact', path: '/contact' },
 ];
 
@@ -60,7 +60,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               />
-              <span className="text-xl font-semibold text-yellow-400">Data Tutorials</span>
+              <span className="text-xl font-semibold text-white">Data Tutorials</span>
             </Link>
 
             {/* Desktop nav */}

@@ -25,8 +25,8 @@ export default function Contact() {
     {
       Icon: MailIcon,
       label: 'Email',
-      value: 'contact@example.com',
-      link: 'mailto:contact@example.com',
+      value: 'swapnjeet555@gmail.com',
+      link: 'mailto:swapnjeet555@gmail.com',
     }
   ];
 
@@ -74,8 +74,8 @@ export default function Contact() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Schedule a Meeting</h2>
-          <p className="text-lg text-gray-600">Book a time that works best for you</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Book a Session</h2>
+          <p className="text-lg text-gray-600">Choose a session type that fits your needs</p>
         </motion.div>
 
         {/* Schedule Meeting Section */}
@@ -83,18 +83,59 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="w-full mt-8"
+          className="w-full mt-8 space-y-6"
         >
-          <div className="w-full h-[600px] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <iframe
-              src="https://cal.com/username/30min"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              scrolling="yes"
-              className="block w-full h-full"
-              title="Schedule a meeting"
-            ></iframe>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {/* 30 Minutes Meeting */}
+            <a 
+              href="https://topmate.io/data_tutorials/492286?utm_source=public_profile&utm_campaign=data_tutorials" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block p-6 bg-white rounded-xl border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">45 Minutes Meeting</h3>
+              <p className="text-gray-600 text-sm">Career guidance (Data Analyst)</p>
+              <div className="mt-4 text-purple-600 font-medium flex items-center">
+                Book Now
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </a>
+
+            {/* 60 Minutes Meeting */}
+            <a 
+              href="https://topmate.io/data_tutorials/492324?utm_source=public_profile&utm_campaign=data_tutorials" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block p-6 bg-white rounded-xl border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">45 Minutes Meeting</h3>
+              <p className="text-gray-600 text-sm">Interview preparation & Tips (Power BI)</p>
+              <div className="mt-4 text-purple-600 font-medium flex items-center">
+                Book Now
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </a>
+
+            {/* View All Sessions */}
+            <a 
+              href="https://topmate.io/data_tutorials?utm_source=public_profile&utm_campaign=data_tutorials" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl border border-purple-100 hover:shadow-md transition-all duration-300 group"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">View All Sessions</h3>
+              <p className="text-gray-600 text-sm">See all available time slots and session types</p>
+              <div className="mt-4 text-purple-600 font-medium flex items-center group-hover:text-purple-700">
+                Explore Options
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </a>
           </div>
         </motion.div>
 

@@ -1,14 +1,15 @@
 import { ChartPieIcon, ChartBarIcon, UserGroupIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
+import type { ReactNode } from 'react';
 import { FaDatabase, FaPython } from 'react-icons/fa';
 
 export interface PurchaseMaterialType {
+  [x: string]: ReactNode;
   id: number;
   title: string;
   description: string;
   icon: React.ReactElement;
   features: string[];
   image: string;
-  price: string;
 }
 
 export interface PurchaseMaterialProps {
