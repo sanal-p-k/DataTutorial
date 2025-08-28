@@ -549,20 +549,26 @@ const Home: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
               </div>
               <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                Sales Performance Dashboard
+                Blinkit Dashboard
               </div>
               <div className="w-24"></div>
             </div>
-            <div className="aspect-video bg-gray-100 flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 mb-4">
-                  <ChartPieIcon className="h-6 w-6 text-blue-600" />
-                </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-1">Interactive Dashboard Preview</h3>
-                <p className="text-gray-500 mb-4">This is where an interactive dashboard would be embedded</p>
-                <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <div className="aspect-video bg-gray-100">
+              <iframe 
+                title="Interactive Dashboard"
+                className="w-full h-full border-0"
+                src="https://app.powerbi.com/view?r=eyJrIjoiMWVmMzk2MWMtMWM5OC00ODEwLWJjMWEtZWFiMGRlMWRiMDJmIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                allowFullScreen={true}
+              ></iframe>
+              <div className="absolute bottom-4 right-4">
+                <a 
+                  href="https://app.powerbi.com/view?r=eyJrIjoiMWVmMzk2MWMtMWM5OC00ODEwLWJjMWEtZWFiMGRlMWRiMDJmIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
                   View Full Dashboard
-                </button>
+                </a>
               </div>
             </div>
           </div>
