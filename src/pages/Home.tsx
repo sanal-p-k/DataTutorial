@@ -560,16 +560,6 @@ const Home: React.FC = () => {
                 src="https://app.powerbi.com/view?r=eyJrIjoiMWVmMzk2MWMtMWM5OC00ODEwLWJjMWEtZWFiMGRlMWRiMDJmIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
                 allowFullScreen={true}
               ></iframe>
-              <div className="absolute bottom-4 right-4">
-                <a 
-                  href="https://app.powerbi.com/view?r=eyJrIjoiMWVmMzk2MWMtMWM5OC00ODEwLWJjMWEtZWFiMGRlMWRiMDJmIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  View Full Dashboard
-                </a>
-              </div>
             </div>
           </div>
         </div>
