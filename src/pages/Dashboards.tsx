@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
+import { powerBIDashboards } from '../data/powerBIDashboards';
 
 // Animation variants
 const container = {
@@ -26,23 +26,10 @@ const staggerItem = {
   }
 };
 
-// Helper function to get image path based on tool name
-const getToolImage = (tool: string) => {
-  const toolImages: {[key: string]: string} = {
-    'Power BI': '/images/purchase/powerbi.png',
-    'Tableau': '/images/purchase/tableau.png',
-    'SQL': '/images/purchase/sql.png',
-    'Excel': '/images/purchase/excel.png',
-    'Python': '/images/purchase/python.png',
-    'Google Analytics': '/images/placeholder.jpg',
-    'HRIS': '/images/placeholder.jpg',
-    'SAP': '/images/placeholder.jpg',
-    'CRM': '/images/placeholder.jpg'
-  };
-  return toolImages[tool] || '/images/placeholder.jpg';
-};
+// Helper function to get category color
 
-const dashboards = [
+// Other dashboard examples (non-Power BI)
+const otherDashboards = [
   {
     id: 1,
     title: 'Excel Dashboards',
@@ -63,15 +50,6 @@ const dashboards = [
   },
   {
     id: 3,
-    title: 'Power BI Dashboards',
-    category: 'Power BI',
-    description: 'Interactive business intelligence dashboards with advanced visualizations and data modeling.',
-    tools: ['Power BI', 'DAX', 'Power Query'],
-    color: 'from-yellow-500 to-amber-500',
-    image: '/images/purchase/powerbi.png'
-  },
-  {
-    id: 4,
     title: 'Tableau Visualizations',
     category: 'Tableau',
     description: 'Beautiful and insightful data visualizations for data exploration and storytelling.',
@@ -80,7 +58,7 @@ const dashboards = [
     image: '/images/purchase/tableau.png'
   },
   {
-    id: 5,
+    id: 4,
     title: 'SQL Queries & Analysis',
     category: 'SQL',
     description: 'Advanced SQL queries, stored procedures, and database optimization techniques.',
@@ -89,7 +67,7 @@ const dashboards = [
     image: '/images/purchase/sql.png'
   },
   {
-    id: 6,
+    id: 5,
     title: 'Python Data Analysis',
     category: 'Python',
     description: 'Data analysis, machine learning, and automation scripts using Python.',
@@ -98,60 +76,30 @@ const dashboards = [
     image: '/images/purchase/python.png'
   },
   {
-    id: 7,
+    id: 6,
     title: 'Capstone Projects',
     category: 'Capstone',
     description: 'End-to-end data projects showcasing complete data analysis workflows.',
     tools: ['Power BI', 'Python', 'SQL', 'Tableau'],
     color: 'from-green-500 to-emerald-600',
     image: '/images/placeholder.jpg'
-  },
-  {
-    id: 8,
-    title: 'Data Integration',
-    category: 'Power BI',
-    description: 'Connecting multiple data sources and creating unified dashboards.',
-    tools: ['Power BI', 'SQL', 'APIs'],
-    color: 'from-orange-500 to-red-600',
-    image: '/images/placeholder.jpg'
   }
 ];
 
 
 const Dashboards = () => {
+  // Combine all dashboards
+  const allDashboards = [...powerBIDashboards, ...otherDashboards];
+  
   // Group dashboards by category
-  const dashboardsByCategory = dashboards.reduce((acc, dashboard) => {
+  const dashboardsByCategory = allDashboards.reduce((acc, dashboard) => {
     if (!acc[dashboard.category]) {
       acc[dashboard.category] = [];
     }
     acc[dashboard.category].push(dashboard);
     return acc;
-  }, {} as Record<string, typeof dashboards>);
-
-  const getCategoryColor = (category: string) => {
-    const colors: { [key: string]: string } = {
-      'Excel': 'from-green-600 to-emerald-700',
-      'Power BI': 'from-yellow-500 to-amber-500',
-      'Tableau': 'from-purple-500 to-pink-500',
-      'SQL': 'from-blue-500 to-cyan-500',
-      'Python': 'from-indigo-500 to-blue-600',
-      'Capstone': 'from-green-500 to-emerald-600',
-    };
-    return colors[category] || 'from-gray-500 to-gray-700';
-  };
-
-  const getCategoryIcon = (category: string) => {
-    const icons: { [key: string]: string } = {
-      'Excel': 'XLS',
-      'Power BI': 'PBI',
-      'Tableau': 'TBL',
-      'SQL': 'SQL',
-      'Python': 'PY',
-      'Capstone': 'CP',
-    };
-    return icons[category] || '';
-  };
-
+  }, {} as Record<string, typeof allDashboards>);
+  
   // Define the order of categories
   const categoryOrder = ['Power BI', 'Tableau', 'Excel', 'SQL', 'Python', 'Capstone'];
 
@@ -176,7 +124,7 @@ const Dashboards = () => {
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-6">
                 <span className="w-2 h-2 rounded-full bg-purple-400 mr-2 animate-pulse"></span>
                 <span className="text-sm font-medium bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                  Resourse Tab
+                  Resource Tab
                 </span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
@@ -194,7 +142,6 @@ const Dashboards = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Category Sections */}
         {categoryOrder.map((category) => {
           const categoryDashboards = dashboardsByCategory[category] || [];
           if (categoryDashboards.length === 0) return null;
@@ -207,89 +154,126 @@ const Dashboards = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="mb-8 flex items-center"
+                className="mb-6"
               >
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-xs font-bold text-white mr-4 ${getCategoryColor(category)}`}>
-                  {getCategoryIcon(category)}
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900">{category} Projects</h2>
-                <div className="ml-4 flex-1 h-px bg-gradient-to-r from-gray-200 to-transparent"></div>
+                <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+                  <span className={`w-3 h-3 rounded-full mr-3 ${category === 'Power BI' ? 'bg-yellow-500' : category === 'Tableau' ? 'bg-purple-500' : 'bg-blue-500'}`}></span>
+                  {category}
+                  <span className="ml-3 text-sm font-normal text-gray-500">
+                    ({categoryDashboards.length} {categoryDashboards.length === 1 ? 'dashboard' : 'dashboards'})
+                  </span>
+                </h2>
               </motion.div>
 
-              {/* Dashboard Grid */}
-              <motion.div
-                variants={container}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
-                {categoryDashboards.map((dashboard, index) => (
-                  <motion.div
-                    key={dashboard.id}
-                    variants={staggerItem}
-                    custom={index}
-                    className="h-full"
-                  >
-                    <Link 
-                      to={`/dashboards/${dashboard.id}`}
-                      className="block h-full"
-                    >
-                      <div className="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                        {/* Dashboard Preview Image */}
-                        <div className="relative h-40 bg-gray-100 overflow-hidden">
-                          <img 
-                            src={dashboard.image} 
-                            alt={dashboard.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = '/images/placeholder.jpg';
-                            }}
-                          />
-                          <div className={`absolute inset-0 bg-gradient-to-t ${getCategoryColor(category)} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
-                          <div className="absolute bottom-3 right-3 flex -space-x-1">
-                            {dashboard.tools.slice(0, 3).map((tool, i) => (
-                              <div 
-                                key={i}
-                                className="w-6 h-6 rounded-full bg-white border-2 border-white shadow-md overflow-hidden"
-                                title={tool}
+              {/* Dashboard Cards - Horizontal scroll for Power BI, grid for others */}
+              {category === 'Power BI' ? (
+                <div className="relative">
+                  <div className="flex space-x-6 pb-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+                    {categoryDashboards.map((dashboard) => (
+                      <motion.div
+                        key={dashboard.id}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, margin: "-20% 0px -20% 0px" }}
+                        transition={{ duration: 0.3 }}
+                        className="flex-shrink-0 w-80 snap-center"
+                      >
+                        <div className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100">
+                          <div className="aspect-video bg-gray-100 overflow-hidden relative">
+                            <img
+                              src={dashboard.image}
+                              alt={`${dashboard.title} Preview`}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/images/placeholder.jpg';
+                              }}
+                            />
+                          </div>
+                          <div className="p-5 flex-grow flex flex-col">
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{dashboard.title}</h3>
+                            <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">{dashboard.description}</p>
+                            <div className="mt-auto">
+                              <Link
+                                to={`/dashboards/${dashboard.id}`}
+                                className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
                               >
-                                <img 
-                                  src={getToolImage(tool)} 
-                                  alt={tool}
-                                  className="w-full h-full object-cover"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.src = '/images/placeholder.jpg';
-                                  }}
-                                />
-                              </div>
-                            ))}
+                                View Dashboard
+                                <svg
+                                  className="ml-1 w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                  />
+                                </svg>
+                              </Link>
+                            </div>
                           </div>
                         </div>
-                        
-                        <div className="p-6 flex flex-col flex-grow">
-                          <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-indigo-600 transition-colors">
-                            {dashboard.title}
-                          </h3>
-                          
-                          <p className="text-gray-600 mb-5 flex-grow">{dashboard.description}</p>
-                          
-                          <div className="w-full mt-auto py-2 px-4 bg-gradient-to-r from-indigo-50 to-blue-50 text-indigo-600 text-sm font-medium rounded-lg group-hover:from-indigo-100 group-hover:to-blue-100 transition-all duration-300 flex items-center justify-center border border-indigo-100">
-                            View Project
-                            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </motion.div>
+                    ))}
+                  </div>
+                  <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {categoryDashboards.map((dashboard) => (
+                    <motion.div
+                      key={dashboard.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                      className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100"
+                    >
+                      <div className="aspect-video bg-gray-100 overflow-hidden">
+                        <img
+                          src={dashboard.image}
+                          alt={dashboard.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{dashboard.title}</h3>
+                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{dashboard.description}</p>
+                        <div className="flex justify-between items-center">
+                          <Link
+                            to={`/dashboards/${dashboard.id}`}
+                            className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                          >
+                            View Details
+                            <svg
+                              className="ml-1 w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
                             </svg>
-                          </div>
+                          </Link>
                         </div>
                       </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </motion.div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </section>
           );
         })}
       </div>
-
 
       {/* CTA Section */}
       <div className="bg-gradient-to-r from-gray-900 to-gray-800 py-16">

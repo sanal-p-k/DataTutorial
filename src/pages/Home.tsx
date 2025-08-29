@@ -344,7 +344,7 @@ const Home: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
-                  <div className="bg-gray-900/80 rounded-lg p-4 font-mono text-sm text-gray-300 h-64 overflow-y-auto">
+                  <div className="bg-gray-900/80 rounded-lg p-4 font-mono text-sm text-gray-300 h-70 overflow-y-auto">
                     <div className="text-purple-400">// Welcome to DataTutorials</div>
                     <div className="text-blue-400">const</div> <span className="text-green-400">skills</span> = [
                     <div className="ml-4">'Power BI',</div>
@@ -379,10 +379,10 @@ const Home: React.FC = () => {
               { value: '80K+', label: 'Students Trained' }
             ].map((stat, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all">
-                <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                <div className="text-3xl font-bold bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-400 mt-2">{stat.label}</div>
+                <div className="text-sm text-white mt-2">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -551,7 +551,7 @@ const Home: React.FC = () => {
                 prevEl: '.swiper-button-prev-dashboard',
               }}
               autoplay={{
-                delay: 5000,
+                delay: 10000,
                 disableOnInteraction: false,
               }}
               loop={true}
@@ -592,17 +592,21 @@ const Home: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                    E-commerce Analytics
+                    Sales Dashboard
                   </div>
                   <div className="w-24"></div>
                 </div>
-                <div className="aspect-video bg-gray-100 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <ChartBarIcon className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-                    <p className="text-gray-500">E-commerce Analytics Dashboard</p>
-                  </div>
+                <div className="aspect-video bg-gray-100">
+                  <iframe 
+                    title="Sales Dashboard"
+                    className="border-0"
+                    src="https://public.tableau.com/views/SuperstoreSalesDashboard_16753436845960/SalesDashboard?:showVizHome=no&:embed=true"
+                    width="1090"
+                    height="600"
+                    allowFullScreen
+                  ></iframe>
                 </div>
-              </div>
+              </div>  
             </SwiperSlide>
 
             {/* Dashboard 3 */}

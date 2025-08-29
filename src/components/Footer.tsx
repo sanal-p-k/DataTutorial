@@ -57,7 +57,7 @@ export const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <GlobeAltIcon className="h-4 w-4" />
-                <span>www.datatutorials.com</span>
+                <span>https://topmate.io/data_tutorials</span>
               </li>
             </ul>
           </div>
