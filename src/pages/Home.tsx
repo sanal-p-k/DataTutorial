@@ -592,14 +592,14 @@ const Home: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                    Sales Dashboard
+                    Bank Loan Report Dashboard
                   </div>
                   <div className="w-24"></div>
                 </div>
                 <div className="aspect-video bg-gray-100">
                   <iframe 
-                    title="Sales Dashboard"
-                    className="border-0"
+                    title="Bank Loan Report Dashboard"
+                    className="w-full h-full border-0"
                     src="https://app.powerbi.com/view?r=eyJrIjoiY2EzNjZjMjQtNjEwZC00NjVkLWI0YzMtYmIwMWIyODA1Y2FkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
                     allowFullScreen = {true}
                   ></iframe>
@@ -617,14 +617,14 @@ const Home: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                    Financial Dashboard
+                    IPL Analysis
                   </div>
                   <div className="w-24"></div>
                 </div>
                 <div className="aspect-video bg-gray-100">
                   <iframe 
-                    title="Sales Dashboard"
-                    className="border-0"
+                    title="IPL Analysis"
+                    className="w-full h-full border-0"
                     src="https://app.powerbi.com/view?r=eyJrIjoiYTg3ZDZjNjYtZDFkNS00NGViLTg0YTUtZDdiOTcwMmU2ZmU0IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
                     allowFullScreen = {true}
                   ></iframe>
@@ -642,14 +642,14 @@ const Home: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                    Financial Dashboard
+                    Shopify Analaysis Dashboard
                   </div>
                   <div className="w-24"></div>
                 </div>
                 <div className="aspect-video bg-gray-100">
                   <iframe 
-                    title="Sales Dashboard"
-                    className="border-0"
+                    title="Shopify Analaysis Dashboard"
+                    className="w-full h-full border-0"
                     src="https://app.powerbi.com/view?r=eyJrIjoiZGY4MWI2OWYtZWM2Zi00MTFiLWI3ODYtZDQ0MGQ1ZDU4OWMyIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
                     allowFullScreen = {true}
                   ></iframe>
@@ -667,14 +667,14 @@ const Home: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                    Financial Dashboard
+                    Car Sales Dashboard
                   </div>
                   <div className="w-24"></div>
                 </div>
                 <div className="aspect-video bg-gray-100">
                   <iframe 
-                    title="Sales Dashboard"
-                    className="border-0"
+                    title="Car Sales Dashboard"
+                    className="w-full h-full border-0"
                     src="https://app.powerbi.com/view?r=eyJrIjoiNDhlMzgwZTAtZmM5Mi00NWYzLTg0NTUtMDNiNjE5YTg4NGMwIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
                     allowFullScreen = {true}
                   ></iframe>
@@ -692,14 +692,14 @@ const Home: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                    Financial Dashboard
+                    India Elections
                   </div>
                   <div className="w-24"></div>
                 </div>
                 <div className="aspect-video bg-gray-100">
                   <iframe 
-                    title="Sales Dashboard"
-                    className="border-0"
+                    title="India Elections"
+                    className="w-full h-full border-0"
                     src="https://app.powerbi.com/view?r=eyJrIjoiYzc5MDY4YWYtNTg4My00NjkyLWE0ZjEtM2NhOTYyN2FhNzg2IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
                     allowFullScreen = {true}
                   ></iframe>
@@ -717,14 +717,14 @@ const Home: React.FC = () => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                    Financial Dashboard
+                    Coffee Sales Dashboard
                   </div>
                   <div className="w-24"></div>
                 </div>
                 <div className="aspect-video bg-gray-100">
                   <iframe 
-                    title="Sales Dashboard"
-                    className="border-0"
+                    title="Coffee Sales Dashboard"
+                    className="w-full h-full border-0"
                     src="https://app.powerbi.com/view?r=eyJrIjoiYjg0ZDU0YjEtMmU1Ni00MmI5LTliMTItNDQyNDMyYzJlOThkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
                     allowFullScreen = {true}
                   ></iframe>
