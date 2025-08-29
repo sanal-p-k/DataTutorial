@@ -518,8 +518,8 @@ const Home: React.FC = () => {
               animate={{ x: ['0%', '-50%'] }}
               transition={{
                 ease: 'linear',
-                duration: (purchaseMaterials.length * 300) / LOOP_SPEED,
-                repeat: Infinity,
+                duration: window.innerWidth < 768 ? 30 : 30, // Faster on mobile (15s) than desktop (30s)
+                repeat: Infinity
               }}
             >
               {[...purchaseMaterials, ...purchaseMaterials].map((material, index) => (
@@ -539,27 +539,105 @@ const Home: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Interactive Dashboard Showcase</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Explore our sample dashboard to see the power of data visualization</p>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Explore our sample dashboards to see the power of data visualization</p>
           </div>
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-            <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
-              <div className="flex space-x-2 px-4">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          
+          <div className="relative">
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1}
+              navigation={{
+                nextEl: '.swiper-button-next-dashboard',
+                prevEl: '.swiper-button-prev-dashboard',
+              }}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              loop={true}
+              className="dashboard-swiper"
+            >
+            {/* Dashboard 1 */}
+            <SwiperSlide>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+                  <div className="flex space-x-2 px-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                    Blinkit Sales Dashboard
+                  </div>
+                  <div className="w-24"></div>
+                </div>
+                <div className="aspect-video bg-gray-100">
+                  <iframe 
+                    title="Blinkit Sales Dashboard"
+                    className="w-full h-full border-0"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiMWVmMzk2MWMtMWM5OC00ODEwLWJjMWEtZWFiMGRlMWRiMDJmIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                    allowFullScreen={true}
+                  ></iframe>
+                </div>
               </div>
-              <div className="flex-1 text-center text-sm text-gray-500 font-medium">
-                Blinkit Dashboard
+            </SwiperSlide>
+
+            {/* Dashboard 2 */}
+            <SwiperSlide>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+                  <div className="flex space-x-2 px-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                    E-commerce Analytics
+                  </div>
+                  <div className="w-24"></div>
+                </div>
+                <div className="aspect-video bg-gray-100 flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <ChartBarIcon className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                    <p className="text-gray-500">E-commerce Analytics Dashboard</p>
+                  </div>
+                </div>
               </div>
-              <div className="w-24"></div>
+            </SwiperSlide>
+
+            {/* Dashboard 3 */}
+            <SwiperSlide>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+                  <div className="flex space-x-2 px-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                    Financial Dashboard
+                  </div>
+                  <div className="w-24"></div>
+                </div>
+                <div className="aspect-video bg-gray-100 flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <ChartPieIcon className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                    <p className="text-gray-500">Financial Performance Dashboard</p>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            </Swiper>
+            <div className="swiper-button-prev-dashboard absolute left-0 top-1/2 -translate-y-1/2 z-10 -ml-12 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition-colors duration-200">
+              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
             </div>
-            <div className="aspect-video bg-gray-100">
-              <iframe 
-                title="Interactive Dashboard"
-                className="w-full h-full border-0"
-                src="https://app.powerbi.com/view?r=eyJrIjoiMWVmMzk2MWMtMWM5OC00ODEwLWJjMWEtZWFiMGRlMWRiMDJmIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
-                allowFullScreen={true}
-              ></iframe>
+            <div className="swiper-button-next-dashboard absolute right-0 top-1/2 -translate-y-1/2 z-10 -mr-12 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition-colors duration-200">
+              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </div>
           </div>
         </div>
