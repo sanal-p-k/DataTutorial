@@ -216,7 +216,6 @@ const Home: React.FC = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-  const LOOP_SPEED = 90; // px per second
 
   return (
     <>
