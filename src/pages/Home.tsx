@@ -600,10 +600,8 @@ const Home: React.FC = () => {
                   <iframe 
                     title="Sales Dashboard"
                     className="border-0"
-                    src="https://public.tableau.com/views/SuperstoreSalesDashboard_16753436845960/SalesDashboard?:showVizHome=no&:embed=true"
-                    width="1090"
-                    height="600"
-                    allowFullScreen
+                    src="https://app.powerbi.com/view?r=eyJrIjoiY2EzNjZjMjQtNjEwZC00NjVkLWI0YzMtYmIwMWIyODA1Y2FkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                    allowFullScreen = {true}
                   ></iframe>
                 </div>
               </div>  
@@ -623,11 +621,113 @@ const Home: React.FC = () => {
                   </div>
                   <div className="w-24"></div>
                 </div>
-                <div className="aspect-video bg-gray-100 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <ChartPieIcon className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-                    <p className="text-gray-500">Financial Performance Dashboard</p>
+                <div className="aspect-video bg-gray-100">
+                  <iframe 
+                    title="Sales Dashboard"
+                    className="border-0"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiYTg3ZDZjNjYtZDFkNS00NGViLTg0YTUtZDdiOTcwMmU2ZmU0IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                    allowFullScreen = {true}
+                  ></iframe>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            {/* Dashboard 4 */}
+            <SwiperSlide>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+                  <div className="flex space-x-2 px-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
+                  <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                    Financial Dashboard
+                  </div>
+                  <div className="w-24"></div>
+                </div>
+                <div className="aspect-video bg-gray-100">
+                  <iframe 
+                    title="Sales Dashboard"
+                    className="border-0"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiZGY4MWI2OWYtZWM2Zi00MTFiLWI3ODYtZDQ0MGQ1ZDU4OWMyIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                    allowFullScreen = {true}
+                  ></iframe>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            {/* Dashboard 5 */}
+            <SwiperSlide>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+                  <div className="flex space-x-2 px-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                    Financial Dashboard
+                  </div>
+                  <div className="w-24"></div>
+                </div>
+                <div className="aspect-video bg-gray-100">
+                  <iframe 
+                    title="Sales Dashboard"
+                    className="border-0"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiNDhlMzgwZTAtZmM5Mi00NWYzLTg0NTUtMDNiNjE5YTg4NGMwIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                    allowFullScreen = {true}
+                  ></iframe>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            {/* Dashboard 6 */}
+            <SwiperSlide>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+                  <div className="flex space-x-2 px-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                    Financial Dashboard
+                  </div>
+                  <div className="w-24"></div>
+                </div>
+                <div className="aspect-video bg-gray-100">
+                  <iframe 
+                    title="Sales Dashboard"
+                    className="border-0"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiYzc5MDY4YWYtNTg4My00NjkyLWE0ZjEtM2NhOTYyN2FhNzg2IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                    allowFullScreen = {true}
+                  ></iframe>
+                </div>
+              </div>
+            </SwiperSlide>
+
+            {/* Dashboard 7 */}
+            <SwiperSlide>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+                  <div className="flex space-x-2 px-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                    Financial Dashboard
+                  </div>
+                  <div className="w-24"></div>
+                </div>
+                <div className="aspect-video bg-gray-100">
+                  <iframe 
+                    title="Sales Dashboard"
+                    className="border-0"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiYjg0ZDU0YjEtMmU1Ni00MmI5LTliMTItNDQyNDMyYzJlOThkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                    allowFullScreen = {true}
+                  ></iframe>
                 </div>
               </div>
             </SwiperSlide>
