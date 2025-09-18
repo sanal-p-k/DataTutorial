@@ -294,6 +294,8 @@ const Home: React.FC = () => {
                     whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(124, 58, 237, 0.4)' }}
                     whileTap={{ scale: 0.98 }}
                     href="https://topmate.io/data_tutorials"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full px-6 py-3 sm:px-4 sm:py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group whitespace-nowrap"
                   >
                     Start Learning
