@@ -288,28 +288,43 @@ const Home: React.FC = () => {
                 Unlock the power of data with expert-led tutorials in Power BI, Tableau, SQL, and Python. Transform data into insights today.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <motion.a
-                  whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(124, 58, 237, 0.4)' }}
-                  whileTap={{ scale: 0.98 }}
-                  href="Contact"
-                  className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  Start Learning Now
-                  <FaArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </motion.a>
-                
-                <motion.a
-                  whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(239, 68, 68, 0.4)' }}
-                  whileTap={{ scale: 0.98 }}
-                  href="https://www.youtube.com/@datatutorials1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <FaYoutube className="w-5 h-5" />
-                  Watch on YouTube
-                </motion.a>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mx-auto md:mx-0">
+                <div className="col-span-1">
+                  <motion.a
+                    whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(124, 58, 237, 0.4)' }}
+                    whileTap={{ scale: 0.98 }}
+                    href="https://topmate.io/data_tutorials"
+                    className="w-full px-6 py-3 sm:px-4 sm:py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group whitespace-nowrap"
+                  >
+                    Start Learning
+                    <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </motion.a>
+                </div>
+                <div className="col-span-1">
+                  <Link to="/dashboards" className="block w-full">
+                    <motion.div
+                      whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(99, 102, 241, 0.4)' }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full px-6 py-3 sm:px-4 sm:py-3 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group border border-gray-600 whitespace-nowrap"
+                    >
+                      View Dashboards
+                      <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </motion.div>
+                  </Link>
+                </div>
+                <div className="col-span-2">
+                  <motion.a
+                    whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(239, 68, 68, 0.4)' }}
+                    whileTap={{ scale: 0.98 }}
+                    href="https://www.youtube.com/@datatutorials1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                  >
+                    <FaYoutube className="w-5 h-5 flex-shrink-0" />
+                    Watch on YouTube
+                  </motion.a>
+                </div>
               </div>
               
               <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-6">

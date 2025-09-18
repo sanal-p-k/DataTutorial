@@ -156,8 +156,7 @@ const Dashboards = () => {
                 transition={{ duration: 0.5 }}
                 className="mb-6"
               >
-                <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-                  <span className={`w-3 h-3 rounded-full mr-3 ${category === 'Power BI' ? 'bg-yellow-500' : category === 'Tableau' ? 'bg-purple-500' : 'bg-blue-500'}`}></span>
+                <h2 className="text-2xl font-bold text-gray-900">
                   {category}
                   <span className="ml-3 text-sm font-normal text-gray-500">
                     ({categoryDashboards.length} {categoryDashboards.length === 1 ? 'dashboard' : 'dashboards'})
@@ -165,20 +164,20 @@ const Dashboards = () => {
                 </h2>
               </motion.div>
 
-              {/* Dashboard Cards - Horizontal scroll for Power BI, grid for others */}
-              {category === 'Power BI' ? (
-                <div className="relative">
-                  <div className="flex space-x-6 pb-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
-                    {categoryDashboards.map((dashboard) => (
-                      <motion.div
-                        key={dashboard.id}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true, margin: "-20% 0px -20% 0px" }}
-                        transition={{ duration: 0.3 }}
-                        className="flex-shrink-0 w-80 snap-center"
-                      >
-                        <div className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100">
+              {/* Dashboard Cards - Horizontal scroll for all categories */}
+              <div className="relative">
+                <div className="flex space-x-6 pb-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+                  {categoryDashboards.map((dashboard) => (
+                    <motion.div
+                      key={dashboard.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: "-20% 0px -20% 0px" }}
+                      transition={{ duration: 0.3 }}
+                      className="flex-shrink-0 w-80 snap-center"
+                    >
+                      <div className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100">
+                        {dashboard.category === 'Power BI' ? (
                           <div className="aspect-video bg-gray-100 overflow-hidden relative">
                             <img
                               src={dashboard.image}
@@ -190,13 +189,22 @@ const Dashboards = () => {
                               }}
                             />
                           </div>
-                          <div className="p-5 flex-grow flex flex-col">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{dashboard.title}</h3>
-                            <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">{dashboard.description}</p>
-                            <div className="mt-auto">
+                        ) : (
+                          <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <div className="text-center p-4">
+                              <div className="text-4xl mb-2">🚧</div>
+                              <p className="text-gray-500 font-medium">Coming Soon</p>
+                            </div>
+                          </div>
+                        )}
+                        <div className="p-5 flex-grow flex flex-col">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{dashboard.title}</h3>
+                          <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">{dashboard.description}</p>
+                          <div className="mt-auto">
+                            {dashboard.category === 'Power BI' ? (
                               <Link
                                 to={`/dashboards/${dashboard.id}`}
-                                className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                                className="inline-flex items-center text-sm font-medium text-blue-600"
                               >
                                 View Dashboard
                                 <svg
@@ -214,62 +222,36 @@ const Dashboards = () => {
                                   />
                                 </svg>
                               </Link>
-                            </div>
+                            ) : (
+                              <button 
+                                onClick={() => alert('This dashboard is under construction. Coming soon!')}
+                                className="inline-flex items-center text-sm font-medium text-blue-600 bg-transparent border-none p-0 m-0"
+                              >
+                                View Dashboard
+                                <svg
+                                  className="ml-1 w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                  />
+                                </svg>
+                              </button>
+                            )}
                           </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {categoryDashboards.map((dashboard) => (
-                    <motion.div
-                      key={dashboard.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5 }}
-                      className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100"
-                    >
-                      <div className="aspect-video bg-gray-100 overflow-hidden">
-                        <img
-                          src={dashboard.image}
-                          alt={dashboard.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                      <div className="p-5">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{dashboard.title}</h3>
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{dashboard.description}</p>
-                        <div className="flex justify-between items-center">
-                          <Link
-                            to={`/dashboards/${dashboard.id}`}
-                            className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
-                          >
-                            View Details
-                            <svg
-                              className="ml-1 w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                              />
-                            </svg>
-                          </Link>
                         </div>
                       </div>
                     </motion.div>
                   ))}
                 </div>
-              )}
+                <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+              </div>
             </section>
           );
         })}
