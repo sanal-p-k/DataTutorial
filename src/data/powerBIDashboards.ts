@@ -1,4 +1,6 @@
-export const powerBIDashboards = [
+import type { Dashboard } from '../types/dashboard';
+
+export const powerBIDashboards: Dashboard[] = [
   {
     id: 1,
     title: 'Bank Loan Report',
@@ -6,7 +8,7 @@ export const powerBIDashboards = [
     description: 'Comprehensive analysis of bank loan data with interactive visualizations.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/1.png', 
+    image: '/powerbi/1.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiY2EzNjZjMjQtNjEwZC00NjVkLWI0YzMtYmIwMWIyODA1Y2FkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -16,7 +18,7 @@ export const powerBIDashboards = [
     description: 'Detailed analysis of IPL matches, teams, and player performances.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/2.png', 
+    image: '/powerbi/2.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiYTg3ZDZjNjYtZDFkNS00NGViLTg0YTUtZDdiOTcwMmU2ZmU0IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -26,7 +28,7 @@ export const powerBIDashboards = [
     description: 'E-commerce performance dashboard for Shopify stores.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/3.png', 
+    image: '/powerbi/3.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiZGY4MWI2OWYtZWM2Zi00MTFiLWI3ODYtZDQ0MGQ1ZDU4OWMyIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -36,7 +38,7 @@ export const powerBIDashboards = [
     description: 'Automotive sales performance and inventory analysis.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/4.png', 
+    image: '/powerbi/4.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiNDhlMzgwZTAtZmM5Mi00NWYzLTg0NTUtMDNiNjE5YTg4NGMwIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -46,7 +48,7 @@ export const powerBIDashboards = [
     description: 'Comprehensive analysis of Indian election data.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/5.png', 
+    image: '/powerbi/5.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiYzc5MDY4YWYtNTg4My00NjkyLWE0ZjEtM2NhOTYyN2FhNzg2IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -56,7 +58,7 @@ export const powerBIDashboards = [
     description: 'Sales performance and analysis for coffee products.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/6.png', 
+    image: '/powerbi/6.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiYjg0ZDU0YjEtMmU1Ni00MmI5LTliMTItNDQyNDMyYzJlOThkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -66,7 +68,7 @@ export const powerBIDashboards = [
     description: 'Music streaming data analysis and visualization.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/7.png', 
+    image: '/powerbi/7.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMmFjMGFlN2YtMTRmNS00MjI2LWFjZDgtZTc2M2QxNjdkNGRiIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -76,7 +78,7 @@ export const powerBIDashboards = [
     description: 'Healthcare data analysis and patient statistics.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/8.png', 
+    image: '/powerbi/8.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMzczMWQ1MzktYTIxNi00ZWIzLWIzYjctZWM5NDQxYmRiYzljIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -86,7 +88,7 @@ export const powerBIDashboards = [
     description: 'Comprehensive sales performance dashboard.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/9.png', 
+    image: '/powerbi/9.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiYzdkODcxM2UtMmQ2MC00MDYzLThhZWMtNTQ5ZjYxZTMwYzQ3IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -96,7 +98,7 @@ export const powerBIDashboards = [
     description: 'Hotel booking and occupancy analysis.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/10.png', 
+    image: '/powerbi/10.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMzI3ZWNjYjItNDhhYS00OGY3LWE5YjctMWZhNzI3YzE0N2E0IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -106,7 +108,7 @@ export const powerBIDashboards = [
     description: 'E-commerce sales performance and analysis.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/11.png', 
+    image: '/powerbi/11.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiYTdmZjQwNDYtZDQ4OC00N2FmLWIxYTUtOGJlNGQ4Y2U1MmE2IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -116,7 +118,7 @@ export const powerBIDashboards = [
     description: 'Detailed sales performance metrics and KPIs.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/12.png', 
+    image: '/powerbi/12.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMmEzYmQ0NTctOTE5MS00MTI2LThkYjQtODE3ZDM5NTIyMTg2IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -126,7 +128,7 @@ export const powerBIDashboards = [
     description: 'Electric vehicle market analysis and trends.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/13.png', 
+    image: '/powerbi/13.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMTNjNDRmODUtMDExOC00ZGNhLWI0ODctMmY4OWE5NzM5NmIwIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -136,7 +138,7 @@ export const powerBIDashboards = [
     description: 'Ride-sharing data analysis and visualization.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/14.png', 
+    image: '/powerbi/14.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiNGU3N2VlYzctZTc4Ny00MjI4LWI1Y2MtNmJkNGY0MTA3ZjA3IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -146,7 +148,7 @@ export const powerBIDashboards = [
     description: 'Insurance risk assessment and claim analysis.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/15.png', 
+    image: '/powerbi/15.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiZDFhNTAzMjEtN2RlOC00NzYzLTgyODEtNDdkMDQzNDgwNTdjIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -156,7 +158,7 @@ export const powerBIDashboards = [
     description: 'Retail sales performance for Adidas products.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/16.png', 
+    image: '/powerbi/16.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiNmM1NTBlN2ItNTM1ZC00NGE0LWJiZmItYjViMDJlYjA2OGMwIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -166,7 +168,7 @@ export const powerBIDashboards = [
     description: 'E-commerce sales analysis for Amazon products.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/17.png', 
+    image: '/powerbi/17.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiYzY0ZTJlNTUtMTE3NS00M2JjLTg4MzEtMDVhZDE3NGRhM2VjIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -176,7 +178,7 @@ export const powerBIDashboards = [
     description: 'Call center performance and customer service metrics.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/18.png', 
+    image: '/powerbi/18.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiZTllYTljZjAtMDFlZi00NThmLWI0NWEtMjFhY2JiNGZmZTkzIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -186,7 +188,7 @@ export const powerBIDashboards = [
     description: 'Comprehensive IPL cricket statistics and analysis.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/19.png', 
+    image: '/powerbi/19.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiOTM4ZGJkYWUtZTliNi00NzFjLWJkOWMtYjMwNDlhYzllNzg2IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -196,7 +198,7 @@ export const powerBIDashboards = [
     description: 'Pizza sales performance and customer preferences.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/20.png', 
+    image: '/powerbi/20.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiN2Y3MTU5NmItNDMxZi00MWExLTk3ZjgtNWZlZTI3MWFmMmRlIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -206,7 +208,7 @@ export const powerBIDashboards = [
     description: 'Road safety and accident analysis.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/21.png', 
+    image: '/powerbi/21.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiNDY4MGEzYTYtM2UxMy00MzVjLTgyMjMtOTJjZDYwZGJhYTA1IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -216,7 +218,7 @@ export const powerBIDashboards = [
     description: 'Human resources metrics and workforce analytics.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/22.png', 
+    image: '/powerbi/22.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiYzkyZDBkMzEtNTdkNi00YmM1LWI4MjgtZGJiNGQwNDI4NGQ0IiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
   {
@@ -226,7 +228,27 @@ export const powerBIDashboards = [
     description: 'Analysis of financial complaints and resolutions.',
     tools: ['Power BI', 'DAX', 'Power Query'],
     color: 'from-yellow-500 to-amber-500',
-    image: '/dashboards/23.png', 
+    image: '/powerbi/23.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMmM1M2JhZTAtYjE3OS00MzAzLWFiODMtZGE4YjQ2ZTRjMzRmIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
+  },
+  {
+    id: 24,
+    title: 'META Ad Performance Analysis',
+    category: 'Power BI',
+    description: 'Comprehensive analysis of META (Facebook, Instagram) advertising performance metrics and ROI.',
+    tools: ['Power BI', 'DAX', 'Power Query', 'META Ads API'],
+    color: 'from-yellow-500 to-amber-500',
+    image: '/powerbi/24.png',
+    embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMTg1YWE0YzQtYjA2Ny00MTJkLTg5NjUtMmFhMWYzN2RjODlkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
+  },
+  {
+    id: 25,
+    title: 'Insurance Risk & Claims Analysis',
+    category: 'Power BI',
+    description: 'In-depth analysis of insurance risk factors, claim patterns, and financial impact.',
+    tools: ['Power BI', 'DAX', 'Power Query', 'Statistical Analysis'],
+    color: 'from-yellow-500 to-amber-500',
+    image: '/powerbi/25.png',
+    embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiZDFhNTAzMjEtN2RlOC00NzYzLTgyODEtNDdkMDQzNDgwNTdjIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   }
 ];

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -18,9 +18,17 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/dashboards" element={<Dashboards />} />
-          <Route path="/dashboards/:id" element={<DashboardDetail />} />
+          
+          {/* Dashboard Routes */}
+          <Route path="/dashboards">
+            <Route index element={<Dashboards />} />
+            <Route path=":id" element={<DashboardDetail />} />
+          </Route>
+          
           <Route path="/contact" element={<Contact />} />
+          
+          {/* 404 - Keep this last */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Footer />
       </div>

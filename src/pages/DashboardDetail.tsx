@@ -1,41 +1,156 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FaArrowLeft, FaExternalLinkAlt, FaTools, FaChartLine, FaInfoCircle } from 'react-icons/fa';
 import { powerBIDashboards } from '../data/powerBIDashboards';
+import { tableauDashboards } from '../data/tableauDashboards';
 import { motion } from 'framer-motion';
+import type { Dashboard } from '../types/dashboard';
 
 // Combine all dashboard data sources
-const allDashboards = [...powerBIDashboards];
+const allDashboards: Dashboard[] = [...powerBIDashboards as Dashboard[], ...tableauDashboards as Dashboard[]];
 
 const DashboardDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  // Find the dashboard by ID
-  const dashboard = allDashboards.find(d => d.id === parseInt(id || '0'));
+  // Find the dashboard by ID (handles both string and number IDs)
+  const dashboard = allDashboards.find(d => 
+    d.id.toString() === id || d.id === parseInt(id || '0')
+  );
 
-  // Scroll to top on component mount
+  const embedContainerRef = useRef<HTMLDivElement>(null);
+
+  // Handle Tableau embed script injection
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Simulate loading if needed
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, [id]);
+    
+    if (dashboard?.isTableau && dashboard.embedUrl) {
+      setIsLoading(true);
+      
+      // Check if Tableau JS API is already loaded
+      if (!window.tableau) {
+        const script = document.createElement('script');
+        script.src = 'https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js';
+        script.async = true;
+        script.onload = () => initializeTableauViz();
+        script.onerror = () => handleTableauError('Failed to load Tableau JS API');
+        document.body.appendChild(script);
+        
+        // Cleanup function
+        return () => {
+          document.body.removeChild(script);
+        };
+      } else {
+        initializeTableauViz();
+      }
+    } else {
+      const timer = setTimeout(() => setIsLoading(false), 500);
+      return () => clearTimeout(timer);
+    }
+    
+    function initializeTableauViz() {
+      if (!dashboard?.isTableau || !dashboard.embedUrl || !embedContainerRef.current) return;
+      
+      try {
+        // Clear previous content
+        embedContainerRef.current.innerHTML = '';
+        
+        // Create a container for the Tableau viz
+        const container = document.createElement('div');
+        container.style.width = '100%';
+        container.style.height = '100%';
+        container.style.minHeight = '600px';
+        
+        // Create the Tableau viz element
+        const vizElement = document.createElement('tableau-viz');
+        vizElement.setAttribute('id', `tableau-viz-${Date.now()}`);
+        vizElement.setAttribute('src', dashboard.embedUrl);
+        vizElement.setAttribute('hide-tabs', 'true');
+        vizElement.setAttribute('toolbar', 'bottom');
+        vizElement.style.width = '100%';
+        vizElement.style.height = '800px';
+        
+        // Add the viz to the container
+        container.appendChild(vizElement);
+        embedContainerRef.current.appendChild(container);
+        
+        // Set up a mutation observer to detect when the viz is loaded
+        const observer = new MutationObserver((_mutations, obs) => {
+          if (vizElement.shadowRoot?.querySelector('iframe')) {
+            setIsLoading(false);
+            obs.disconnect(); // Stop observing once loaded
+          }
+        });
+        
+        // Start observing the viz element
+        observer.observe(vizElement, { childList: true, subtree: true });
+        
+        // Set a timeout in case the viz fails to load
+        const loadTimeout = setTimeout(() => {
+          if (isLoading) {
+            handleTableauError('Tableau visualization is taking longer than expected to load.');
+          }
+        }, 10000); // 10 second timeout
+        
+        // Cleanup function
+        return () => {
+          clearTimeout(loadTimeout);
+          observer.disconnect();
+          if (embedContainerRef.current) {
+            embedContainerRef.current.innerHTML = '';
+          }
+        };
+        
+      } catch (error) {
+        console.error('Error initializing Tableau viz:', error);
+        handleTableauError('Failed to initialize Tableau visualization.');
+      }
+    }
+    
+    function handleTableauError(message: string) {
+      setIsLoading(false);
+      if (embedContainerRef.current) {
+        embedContainerRef.current.innerHTML = `
+          <div class="bg-red-50 border-l-4 border-red-400 p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm text-red-700">
+                  ${message} Please try refreshing the page or check your network connection.
+                </p>
+                ${dashboard?.embedUrl ? `
+                  <div class="mt-2">
+                    <a href="${dashboard.embedUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                      Open in Tableau Public →
+                    </a>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+  }, [id, dashboard]);
+
+  useEffect(() => {
+    if (!dashboard) {
+      // Redirect to dashboards page if dashboard is not found
+      navigate('/dashboards', { replace: true });
+    }
+  }, [dashboard, navigate]);
 
   if (!dashboard) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="text-center max-w-md">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Dashboard Not Found</h1>
-          <p className="text-gray-600 mb-6">The requested dashboard could not be found or is no longer available.</p>
-          <button
-            onClick={() => navigate('/dashboards')}
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
-          >
-            <FaArrowLeft className="mr-2" />
-            Back to Dashboards
-          </button>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading dashboard...</p>
         </div>
       </div>
     );
@@ -43,7 +158,7 @@ const DashboardDetail = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="flex flex-col min-h-[calc(100vh-64px)] bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Header */}
       <div className="relative bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 text-white pt-24 pb-16 overflow-hidden">
         {/* Animated Background Elements */}
@@ -165,24 +280,26 @@ const DashboardDetail = () => {
             ) : (
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 {dashboard.embedUrl ? (
-                  <div className="relative pt-[56.25%] bg-gray-50">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center p-6 max-w-md">
-                        <div className="animate-pulse flex flex-col items-center">
-                          <FaChartLine className="h-10 w-10 text-gray-300 mb-4" />
-                          <div className="h-2.5 bg-gray-200 rounded-full w-48 mb-4"></div>
-                          <div className="h-2 bg-gray-200 rounded-full w-32 mb-4"></div>
+                  <div className="relative w-full bg-gray-50" style={{ height: '800px' }}>
+                    <div className="relative w-full h-full">
+                      {isLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
+                          <div className="text-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mx-auto mb-4"></div>
+                            <p className="text-gray-600">Loading dashboard...</p>
+                          </div>
                         </div>
-                      </div>
+                      )}
+                      <div 
+                        ref={embedContainerRef} 
+                        className="w-full h-full min-h-[600px] bg-gray-50"
+                      />
+                      {dashboard.isTableau && !isLoading && (
+                        <div className="absolute bottom-4 right-4 bg-white bg-opacity-90 px-3 py-1 rounded-full text-sm text-gray-700 shadow-sm border border-gray-200">
+                          <span className="text-purple-600 font-medium">Tableau</span> Visualization
+                        </div>
+                      )}
                     </div>
-                    <iframe
-                      title={dashboard.title}
-                      src={dashboard.embedUrl}
-                      className="absolute top-0 left-0 w-full h-full border-0"
-                      allowFullScreen={true}
-                      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                      loading="eager"
-                    ></iframe>
                   </div>
                 ) : (
                   <div className="p-12 text-center bg-gray-50 rounded-xl">
@@ -201,38 +318,155 @@ const DashboardDetail = () => {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">About This Dashboard</h3>
               <div className="prose max-w-none text-gray-600">
                 <p>
-                  This dashboard provides comprehensive insights and analytics for {dashboard.title.toLowerCase()}.
-                  It includes various visualizations and metrics to help you understand the data better and make informed decisions.
+                  {dashboard.detailedDescription || `This dashboard provides comprehensive insights and analytics for ${dashboard.title.toLowerCase()}.
+                  It includes various visualizations and metrics to help you understand the data better and make informed decisions.`}
                 </p>
-                <p className="mt-4">
-                  The data is updated regularly to ensure you have access to the most current information.
-                  Use the interactive elements to filter and explore the data in more detail.
-                </p>
+                
+                {dashboard.features && dashboard.features.length > 0 && (
+                  <div className="mt-6">
+                    <h4 className="text-base font-medium text-gray-900 mb-3">Key Features</h4>
+                    <ul className="space-y-2">
+                      {dashboard.features.map((feature, index) => (
+                        <li key={index} className="flex items-start">
+                          <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-gray-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-100">
-                <h4 className="text-sm font-medium text-gray-900 mb-3">Key Metrics</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {['Performance', 'Engagement', 'Growth'].map((metric) => (
-                    <div key={metric} className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-xs font-medium text-gray-500">{metric}</p>
-                      <p className="text-2xl font-bold text-gray-900">
-                        {Math.floor(Math.random() * 100)}%
+                <h4 className="text-sm font-medium text-gray-900 mb-3">Dashboard Details</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {dashboard.dataSource && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-xs font-medium text-gray-500">Data Source</p>
+                      <p className="text-sm font-medium text-gray-900 mt-1">{dashboard.dataSource}</p>
+                    </div>
+                  )}
+                  
+                  {dashboard.lastUpdated && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-xs font-medium text-gray-500">Last Updated</p>
+                      <p className="text-sm font-medium text-gray-900 mt-1">
+                        {new Date(dashboard.lastUpdated).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
                       </p>
-                      <div className="mt-1 flex items-center text-xs">
-                        <span className="text-green-600 font-medium">+{Math.floor(Math.random() * 10)}%</span>
-                        <span className="text-gray-500 ml-1">vs last period</span>
+                    </div>
+                  )}
+                  
+                  {dashboard.views !== undefined && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-xs font-medium text-gray-500">Views</p>
+                      <p className="text-sm font-medium text-gray-900 mt-1">
+                        {dashboard.views.toLocaleString()}
+                      </p>
+                    </div>
+                  )}
+                  
+                  {dashboard.favorites !== undefined && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-xs font-medium text-gray-500">Favorites</p>
+                      <p className="text-sm font-medium text-gray-900 mt-1">
+                        {dashboard.favorites.toLocaleString()}
+                      </p>
+                    </div>
+                  )}
+                  
+                  {dashboard.category && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-xs font-medium text-gray-500">Category</p>
+                      <p className="text-sm font-medium text-gray-900 mt-1">{dashboard.category}</p>
+                    </div>
+                  )}
+                  
+                  {dashboard.tools && dashboard.tools.length > 0 && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-xs font-medium text-gray-500">Tools Used</p>
+                      <div className="flex flex-wrap gap-1.5 mt-1">
+                        {dashboard.tools.map((tool, index) => (
+                          <span key={index} className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                            {tool}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
+        {/* Related Tableau Dashboards Section */}
+        {tableauDashboards.length > 0 && (
+          <div className="mt-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">More Tableau Dashboards</h2>
+              <button
+                onClick={() => navigate('/dashboards?category=Tableau')}
+                className="text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors duration-200"
+              >
+                View All Tableau Dashboards <span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {tableauDashboards
+                .filter(d => d.id.toString() !== id) // Exclude current dashboard
+                .slice(0, 3) // Show max 3 related dashboards
+                .map((relatedDashboard) => (
+                  <div 
+                    key={relatedDashboard.id}
+                    className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 cursor-pointer"
+                    onClick={() => navigate(`/dashboard/${relatedDashboard.id}`)}
+                  >
+                    <div className="h-40 bg-gray-100 overflow-hidden">
+                      <img 
+                        src={relatedDashboard.image} 
+                        alt={relatedDashboard.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-medium text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
+                        {relatedDashboard.title}
+                      </h3>
+                      <p className="text-sm text-gray-500 line-clamp-2">
+                        {relatedDashboard.description}
+                      </p>
+                      <div className="mt-3 flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            {relatedDashboard.category}
+                          </span>
+                        </div>
+                        <button 
+                          className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/dashboard/${relatedDashboard.id}`);
+                          }}
+                        >
+                          View Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
+
         {/* Dashboard Info */}
-        <div className="bg-white shadow rounded-lg overflow-hidden">
+        <div className="bg-white shadow rounded-lg overflow-hidden mt-8">
           <div className="px-6 py-4 border-b border-gray-200">
             <h3 className="text-lg font-medium text-gray-900">Dashboard Details</h3>
           </div>
@@ -240,7 +474,7 @@ const DashboardDetail = () => {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 {/* Action Buttons */}
-                <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   {dashboard.embedUrl && (
                     <a
                       href={dashboard.embedUrl}
