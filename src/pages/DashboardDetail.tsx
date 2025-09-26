@@ -405,66 +405,7 @@ const DashboardDetail = () => {
           </div>
         </div>
 
-        {/* Related Tableau Dashboards Section */}
-        {tableauDashboards.length > 0 && (
-          <div className="mt-12">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">More Tableau Dashboards</h2>
-              <button
-                onClick={() => navigate('/dashboards?category=Tableau')}
-                className="text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors duration-200"
-              >
-                View All Tableau Dashboards <span aria-hidden="true">&rarr;</span>
-              </button>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {tableauDashboards
-                .filter(d => d.id.toString() !== id) // Exclude current dashboard
-                .slice(0, 3) // Show max 3 related dashboards
-                .map((relatedDashboard) => (
-                  <div 
-                    key={relatedDashboard.id}
-                    className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 cursor-pointer"
-                    onClick={() => navigate(`/dashboard/${relatedDashboard.id}`)}
-                  >
-                    <div className="h-40 bg-gray-100 overflow-hidden">
-                      <img 
-                        src={relatedDashboard.image} 
-                        alt={relatedDashboard.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-medium text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
-                        {relatedDashboard.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 line-clamp-2">
-                        {relatedDashboard.description}
-                      </p>
-                      <div className="mt-3 flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            {relatedDashboard.category}
-                          </span>
-                        </div>
-                        <button 
-                          className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            navigate(`/dashboard/${relatedDashboard.id}`);
-                          }}
-                        >
-                          View Details
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-        )}
-
+        
         {/* Dashboard Info */}
         <div className="bg-white shadow rounded-lg overflow-hidden mt-8">
           <div className="px-6 py-4 border-b border-gray-200">

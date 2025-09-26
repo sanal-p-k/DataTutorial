@@ -2,6 +2,16 @@ import type { Dashboard } from '../types/dashboard';
 
 export const powerBIDashboards: Dashboard[] = [
   {
+    id: 24,
+    title: 'META Ad Performance Analysis',
+    category: 'Power BI',
+    description: 'Comprehensive analysis of META (Facebook, Instagram) advertising performance metrics and ROI.',
+    tools: ['Power BI', 'DAX', 'Power Query', 'META Ads API'],
+    color: 'from-yellow-500 to-amber-500',
+    image: '/powerbi/24.png',
+    embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMTg1YWE0YzQtYjA2Ny00MTJkLTg5NjUtMmFhMWYzN2RjODlkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
+  },
+  {
     id: 1,
     title: 'Bank Loan Report',
     category: 'Power BI',
@@ -231,16 +241,7 @@ export const powerBIDashboards: Dashboard[] = [
     image: '/powerbi/23.png', 
     embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMmM1M2JhZTAtYjE3OS00MzAzLWFiODMtZGE4YjQ2ZTRjMzRmIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
   },
-  {
-    id: 24,
-    title: 'META Ad Performance Analysis',
-    category: 'Power BI',
-    description: 'Comprehensive analysis of META (Facebook, Instagram) advertising performance metrics and ROI.',
-    tools: ['Power BI', 'DAX', 'Power Query', 'META Ads API'],
-    color: 'from-yellow-500 to-amber-500',
-    image: '/powerbi/24.png',
-    embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiMTg1YWE0YzQtYjA2Ny00MTJkLTg5NjUtMmFhMWYzN2RjODlkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9'
-  },
+  
   {
     id: 25,
     title: 'Insurance Risk & Claims Analysis',

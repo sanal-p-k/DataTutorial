@@ -748,6 +748,31 @@ const Home: React.FC = () => {
                 </div>
               </div>
             </SwiperSlide>
+
+            {/* Dashboard 8 - META Ad Performance Analysis */}
+            <SwiperSlide>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="p-1 bg-gray-100 border-b border-gray-200 flex items-center">
+                  <div className="flex space-x-2 px-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-sm text-gray-500 font-medium">
+                    META Ad Performance Analysis
+                  </div>
+                  <div className="w-24"></div>
+                </div>
+                <div className="aspect-video bg-gray-100">
+                  <iframe 
+                    title="META Ad Performance Analysis"
+                    className="w-full h-full border-0"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiMTg1YWE0YzQtYjA2Ny00MTJkLTg5NjUtMmFhMWYzN2RjODlkIiwidCI6ImNmYzRlN2U1LWYzM2QtNDU5YS05YTc0LWMwMzY0MTMzMDUzZCJ9"
+                    allowFullScreen={true}
+                  ></iframe>
+                </div>
+              </div>
+            </SwiperSlide>
             </Swiper>
             <div className="swiper-button-prev-dashboard absolute left-0 top-1/2 -translate-y-1/2 z-10 -ml-12 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition-colors duration-200">
               <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
